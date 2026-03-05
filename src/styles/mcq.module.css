@@ -1,0 +1,22 @@
+.correct {
+    background-color: green;
+}
+.options {
+    display: block;
+    text-align: start;
+    margin-bottom: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.selectable-options.options[data-selected="true"] {
+    border: 1px solid rgba(56, 85, 247, 0.8);
+    background-color: rgba(56, 85, 247, 0.3);
+}
+.selectable-options:hover {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+}
+.options[data-correct="true"] {
+    background-color: rgba(4, 254, 4, 0.47);
+}
+.options[data-wrong="true"] {
+    background-color: rgba(241, 33, 33, 0.485);
+}

@@ -1,0 +1,50 @@
+.body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 2rem;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0f2f9;
+}
+.container {
+    min-width: 900px;
+    margin: 0 auto;
+    background-color: #ffff;
+    padding: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+.previous,
+.next,
+.submit,
+.back {
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 30px;
+}
+.previous::before {
+    content: "\e902";
+    font-family: "gen-quiz";
+    /* margin-right: 2px; */
+    font-size: larger;
+}
+.next::after {
+    content: "\e903";
+    font-family: "gen-quiz";
+    margin-left: 4px;
+    font-size: larger;
+}
+.back::before {
+    content: "\ea44";
+    font-family: "gen-quiz";
+    margin-right: 4px;
+}

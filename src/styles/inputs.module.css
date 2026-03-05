@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+.container label {
+    font-weight: 600;
+}
+.select,
+.input {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin: 2px 0px;
+    appearance: none;
+}
+.select-wrapper {
+    position: relative;
+    width: 100%;
+}
+.select-wrapper:hover .drop-down {
+    font-weight: bold;
+}
+.select {
+    width: 100%;
+    cursor: pointer;
+}
+.drop-down {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    pointer-events: none; /* TODO: wow allows clicking select */
+}
+.drop-down::before {
+    content: "\e901";
+    font-family: "gen-quiz";
+}

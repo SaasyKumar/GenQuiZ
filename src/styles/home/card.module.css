@@ -1,0 +1,53 @@
+.card {
+    height: 240px;
+    width: 360px;
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow:
+        0 4px 10px rgba(0, 0, 0, 0.05),
+        0 10px 25px rgba(0, 0, 0, 0.08);
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.card:hover {
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.08),
+        0 20px 40px rgba(0, 0, 0, 0.12);
+}
+.card p {
+    flex: 1;
+    padding-right: 10px;
+}
+.icon {
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    font-size: 30px;
+}
+.icon::before {
+    font-family: "gen-quiz";
+}
+.link {
+    text-decoration: none;
+    color: none;
+    width: 100px;
+    height: 40px;
+}
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    width: 100px;
+    height: 40px;
+    font-weight: bold;
+}
+.button:hover {
+    background-color: rgb(114, 41, 238);
+}

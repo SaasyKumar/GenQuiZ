@@ -1,0 +1,51 @@
+.body {
+    padding: 3rem 4rem;
+    background-color: #e0f2f9;
+    height: 100vh;
+    /* display: flex;
+    flex-direction: column; */
+}
+.container {
+    margin: 0 auto;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    width: 800px;
+    padding: 2rem;
+    border-radius: 5px;
+    background-color: #ffff;
+}
+.input {
+    width: 390px;
+}
+.options-1,
+.options-2 {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
+.txt-input-label {
+    font-weight: 600;
+}
+.file-input {
+    appearance: none;
+}
+.quiz-input {
+    min-height: 400px;
+    border-radius: 5px;
+    padding: 1rem;
+    flex: 1;
+}
+.submit-button,
+.load-button {
+    margin-top: 10px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+}
+.submit-button::before {
+    content: "\e997";
+    font-family: "gen-quiz";
+    margin-right: 5px;
+}

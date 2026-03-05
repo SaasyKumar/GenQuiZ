@@ -1,0 +1,97 @@
+Header:
+Logo: QuizZen
+Navigation Bar:
+Home
+Features
+How It Works
+Pricing
+Testimonials
+Contact Us
+Main Banner:
+Headline: "Create Engaging Quizzes in Seconds with QuizZen"
+Subheadline: "Harness the power of AI to generate customized quizzes for any subject."
+Call to Action (CTA): "Get Started Now"
+Key Features Section:
+AI-Driven Content
+Generate quizzes on any topic using advanced natural language processing.
+Customizable Difficulty Levels
+Choose from easy, medium, or hard difficulty levels to suit your needs.
+Multiple Question Types
+Support for multiple-choice, true/false, short answer, and more.
+Instant Feedback
+Provide immediate results and explanations for incorrect answers.
+Shareable Quizzes
+Easily share your quizzes via link or embed them on your website.
+Benefits Section:
+Save Time: Automate the quiz creation process.
+Engage Learners: Create interactive and fun quizzes.
+Assess Knowledge: Effectively evaluate understanding and retention.
+Testimonials Section:
+Quote 1: "QuizZen has revolutionized the way I create quizzes for my students. It's fast, efficient, and incredibly versatile." – Jane Doe, Teacher
+Quote 2: "As a freelancer, I needed a quick way to generate quizzes for my clients. QuizZen delivers every time!" – John Smith, Freelancer
+Features Page
+
+Detailed Feature Explanations:
+AI-Driven Content Generation
+Learn how our AI algorithms curate questions based on your input.
+Custom Difficulty Levels
+Understand how to set the perfect challenge for your audience.
+Versatile Question Types
+Explore the variety of question formats available.
+Real-Time Feedback
+Discover how instant results can enhance learning experiences.
+Easy Sharing Options
+Get tips on how to share and embed quizzes effectively.
+Use Cases Section:
+Education: Create quizzes for classrooms, online courses, and tutoring sessions.
+Corporate Training: Develop engaging training materials for employees.
+Personal Use: Test your knowledge on hobbies, trivia, and more.
+How It Works Page
+
+Step-by-Step Guide:
+Sign Up: Create an account in seconds.
+Input Topic: Enter the subject or topic for your quiz.
+Select Parameters: Choose difficulty level, question types, and number of questions.
+Generate Quiz: Click the button to let our AI create your quiz.
+Review & Edit: Make any necessary adjustments to the generated quiz.
+Share: Distribute your quiz via link or embed code.
+Visual Aids:
+Screenshots or video tutorials demonstrating each step.
+Pricing Page
+
+Pricing Plans:
+Free Plan
+Limited number of quizzes
+Basic features
+Pro Plan ($9.99/month)
+Unlimited quizzes
+Advanced features
+Priority support
+Enterprise Plan (Custom Pricing)
+White-label solutions
+API access
+Dedicated account manager
+CTA: "Choose Your Plan"
+Testimonials Page
+
+Extended Testimonials:
+Detailed success stories from users across different fields.
+Video testimonials for added credibility.
+Contact Us Page
+
+Contact Form:
+Name
+Email
+Subject
+Message
+Additional Contact Info:
+Email: support@quizzen.com
+Phone: 1-800-QUIZZEN
+Address: 123 Quiz Lane, Knowledge City, Learnville
+Social Media Links:
+Facebook
+Twitter
+LinkedIn
+Instagram
+Footer:
+Quick Links: Home, Features, How It Works, Pricing, Testimonials, Contact Us

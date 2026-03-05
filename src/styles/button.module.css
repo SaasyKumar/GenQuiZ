@@ -1,0 +1,26 @@
+.button {
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.primary {
+    background-color: rgb(124 58 237 / 1);
+    color: white;
+    font-weight: 500;
+}
+.primary:hover {
+    background-color: rgb(114, 41, 238);
+}
+.primary[data-disabled="true"] {
+    background-color: rgb(124 58 237 / 0.5);
+}
+.button[data-disabled="true"] {
+    cursor: not-allowed;
+}
+.button[data-correct="true"] {
+    background-color: green;
+}
+.button[data-wrong="true"] {
+    background-color: red;
+}

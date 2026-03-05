@@ -1,0 +1,14 @@
+.icon {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.name {
+    display: flex;
+    flex-direction: column;
+    font-weight: 700;
+}
+.first {
+    font-size: 12px;
+    margin-bottom: -7px;
+}

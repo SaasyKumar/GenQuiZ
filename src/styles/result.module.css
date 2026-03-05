@@ -1,0 +1,8 @@
+.container {
+    display: block;
+    height: 100vh;
+    padding: 2rem;
+}
+.container h1 {
+    text-align: center;
+}
