@@ -6,32 +6,32 @@ import DOMPurify from "dompurify";
 import Button from "../Button";
 import Inputs from "../Inputs";
 import styles from "/src/styles/generate/generatequiz.module.css";
+import { useTranslation } from "react-i18next";
 
 export default function LoadQuiz() {
+    const { t } = useTranslation();
     const [text, updateText] = useState<string>("");
     const navigate = useNavigate();
-    const appCTX = useContext(appContext);
+    const ctx = useContext(appContext);
     useEffect(() => {
-        appCTX?.updateHeaderDisplay(false);
+        ctx?.updateHeaderDisplay(false);
     }, []);
     function loadQuiz() {
-        appCTX?.setQuestionsList(extractFromAikenFormat(text));
+        ctx?.setQuestionsList(extractFromAikenFormat(text));
         navigate("/app/quiz");
     }
     return (
         <>
             <div className={styles["body"]}>
                 <div className={styles["container"]}>
-                    <h1>Extract from text</h1>
-                    <label htmlFor="textinput">
-                        Paste the question in aiken format:
-                    </label>
+                    <h1>{t("parse.pageTitle")}</h1>
+                    <label htmlFor="textinput">{t("parse.pasteLabel")}</label>
                     <Inputs
                         name="text-input"
                         InputOptions={{
                             inputType: "text",
                             styleClass: styles["quiz-input"],
-                            placeholderContent: "Paste the Aiken format Text..",
+                            placeholderContent: t("parse.placeholder"),
                         }}
                         onChange={(ev) => {
                             updateText(DOMPurify.sanitize(ev.target.value));
@@ -41,7 +41,7 @@ export default function LoadQuiz() {
                         buttonStyle={styles["load-button"]}
                         onClick={loadQuiz}
                         variant="primary"
-                        content="Load"
+                        content={t("parse.loadButton")}
                     />
                 </div>
             </div>

@@ -12,7 +12,7 @@ function parseMCQ(text: string): MCQ[] {
     const blocks = text.trim().split(/\n\s*\n/);
 
     return blocks.map((block) => {
-        const lines = block.split("\n").map((l) => l.trim());
+        const lines = block.split("\n").map((line) => line.trim());
 
         const question = lines[0].replace(/^Question:\s*/, "");
 

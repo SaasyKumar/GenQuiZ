@@ -21,14 +21,14 @@ export default function Button({
     let classString = buttonStyle
         ? styles["button"] + " " + buttonStyle + " "
         : styles["button"] + " ";
-    const AnswerAttributes: Record<string, string> = {};
+    const answerAttributes: Record<string, string> = {};
     if (isSelected) {
-        AnswerAttributes["data-selected"] = "true";
+        answerAttributes["data-selected"] = "true";
     }
     if (isCorrectAnswer) {
-        AnswerAttributes["data-correct"] = "true";
+        answerAttributes["data-correct"] = "true";
     } else if (isWrongAnswer) {
-        AnswerAttributes["data-wrong"] = "true";
+        answerAttributes["data-wrong"] = "true";
     }
     classString += variant == "primary" ? styles["primary"] : "";
     return (
@@ -39,7 +39,7 @@ export default function Button({
                     onClick?.(ev);
                 }}
                 {...(disabled ? { "data-disabled": "true" } : {})}
-                {...AnswerAttributes}
+                {...answerAttributes}
             >
                 {content}
             </div>

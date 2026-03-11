@@ -12,8 +12,8 @@ export default function MCQ({
     optionsSelected: string | null;
     showAnswer?: boolean;
 }) {
-    let btnStyle = styles["options"];
-    btnStyle += showAnswer ? "" : " " + styles["selectable-options"];
+    let buttonClassName = styles["options"];
+    buttonClassName += showAnswer ? "" : " " + styles["selectable-options"];
     const options = Object.keys(question["options"]).map((key) => {
         const selected =
             optionsSelected && optionsSelected == key ? true : false;
@@ -21,7 +21,7 @@ export default function MCQ({
         //     isCorrectAnswer: { key == question["answer"]? true :false},
         // } :{};
         // FIXME a chess style blunder okay great answer like that?
-        const AnswerAttributes = showAnswer
+        const answerAttributes = showAnswer
             ? {
                   isCorrectAnswer: key == question["answer"],
                   isWrongAnswer: selected && key != question["answer"],
@@ -31,8 +31,8 @@ export default function MCQ({
             <Button
                 key={key}
                 isSelected={selected}
-                buttonStyle={btnStyle}
-                {...AnswerAttributes}
+                buttonStyle={buttonClassName}
+                {...answerAttributes}
                 onClick={() => {
                     if (onOptionClick) {
                         onOptionClick(key, question["id"]);

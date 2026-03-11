@@ -1,11 +1,15 @@
 import styles from "/src/styles/header.module.css";
 import { NavLink } from "react-router-dom";
 import Icon from "./Icon";
+import { useTranslation } from "react-i18next";
+
 export default function Header() {
+    const { t } = useTranslation();
+
     const navigationList: Record<string, Record<string, string>> = {
-        gen: { content: "Generate Quiz", link: "/app" },
-        extract: { content: "Extract", link: "/app/load-quiz" },
-        load: { content: "Load", link: "/app/load" },
+        gen: { content: t("header.nav.generate"), link: "/app" },
+        extract: { content: t("header.nav.parse"), link: "/app/load-quiz" },
+        load: { content: t("header.nav.myQuizzes"), link: "/app/load" },
     };
     const navigation = Object.keys(navigationList).map((key) => {
         return (
@@ -13,7 +17,6 @@ export default function Header() {
                 key={key}
                 to={navigationList[key]["link"]}
                 end
-                // TODO: wow end if default children is set
                 className={({ isActive }) =>
                     `${styles["nav-link"]} ${isActive ? styles["active"] : ""}`
                 }

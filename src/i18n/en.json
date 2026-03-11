@@ -1,0 +1,72 @@
+{
+    "home": {
+        "nav": {
+            "howItWorks": "How It Works",
+            "features": "Features",
+            "support": "Support"
+        },
+        "footer": {
+            "privacy": "Privacy",
+            "terms": "Terms",
+            "about": "About",
+            "contact": "Contact"
+        },
+        "banner": {
+            "tagline": "Create engaging, AI-powered quizzes from your notes or documents in seconds — effortlessly and accurately."
+        },
+        "sections": {
+            "overviewLabel": "OVERVIEW",
+            "overviewHeading": "What you can do with GenQuiZ",
+            "cards": {
+                "generate": {
+                    "heading": "AI-Powered Quiz Generation",
+                    "para": "Paste your study notes or articles and let our AI instantly craft accurate, relevant questions tailored to your content.",
+                    "button": "Generate Quiz"
+                },
+                "parse": {
+                    "heading": "Parse from Aiken Format",
+                    "para": "Already have questions in Aiken format? Paste them in and jump straight into quiz mode.",
+                    "button": "Parse Quiz"
+                },
+                "cloud": {
+                    "heading": "Load from Cloud",
+                    "para": "Sign in to access and retake quizzes you've previously generated — anytime, anywhere.",
+                    "button": "Sign In"
+                }
+            }
+        }
+    },
+    "header": {
+        "nav": {
+            "generate": "Generate Quiz",
+            "parse": "Parse Quiz",
+            "myQuizzes": "My Quizzes"
+        }
+    },
+    "generate": {
+        "pageTitle": "Generate a New Quiz",
+        "difficultyLabel": "Difficulty Level",
+        "difficultyOptions": ["Child", "Easy", "Medium", "Hard"],
+        "numQuestionsLabel": "Number of Questions",
+        "pasteLabel": "Paste your study material below:",
+        "placeholder": "Paste your notes, textbook excerpts, or articles here — GenQuiZ will do the rest...",
+        "submitButton": "Generate Quiz"
+    },
+    "parse": {
+        "pageTitle": "Parse Quiz from Text",
+        "pasteLabel": "Paste your questions in Aiken format:",
+        "placeholder": "Paste your Aiken-formatted questions here and we'll parse them instantly...",
+        "loadButton": "Parse Quiz"
+    },
+    "quiz": {
+        "emptyState": "No questions found. Please generate a quiz or parse one from text first.",
+        "backButton": "← Back",
+        "previousButton": "Previous",
+        "nextButton": "Next",
+        "submitButton": "Submit Quiz"
+    },
+    "result": {
+        "heading": "Your Results",
+        "subheading": "Review your answers below. Correct answers are highlighted."
+    }
+}

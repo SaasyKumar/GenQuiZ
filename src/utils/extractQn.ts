@@ -31,15 +31,15 @@ function extractFromAikenFormat(data: string) {
         for (const line of lines.slice(1)) {
             if (/^ANSWER:/i.test(line)) {
                 inExplanation = false;
-                const m = line.match(/ANSWER:\s*([a-zA-Z])/i);
-                if (m) answer = m[1].toLowerCase();
+                const answerMatch = line.match(/ANSWER:\s*([a-zA-Z])/i);
+                if (answerMatch) answer = answerMatch[1].toLowerCase();
                 continue;
             }
 
             if (/^EXPLANATION:/i.test(line)) {
                 inExplanation = true;
-                const m = line.match(/EXPLANATION:\s*(.*)/i);
-                if (m) explanation = m[1];
+                const explanationMatch = line.match(/EXPLANATION:\s*(.*)/i);
+                if (explanationMatch) explanation = explanationMatch[1];
                 continue;
             }
             if (inExplanation) {

@@ -4,19 +4,20 @@ import MCQ from "./MCQ";
 import styles from "/src/styles/mcqMain.module.css";
 import { appContext } from "./../App";
 import Button from "./../Button";
+import { useTranslation } from "react-i18next";
 
 export default function MCQMain() {
-    const [currentQn, setCurrentQn] = useState<number>(0);
+    const { t } = useTranslation();
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
     const [showAnswer, setShowAnswer] = useState<boolean>(false);
-    const appCTX = useContext(appContext);
+    const ctx = useContext(appContext);
     const navigate = useNavigate();
     useEffect(() => {
-        // FIXME: shuffle
-        appCTX?.updateHeaderDisplay(true);
-    }, [appCTX]);
+        ctx?.updateHeaderDisplay(true);
+    }, [ctx]);
 
     function onOptionClick(value: string, questionId: string) {
-        appCTX?.setSelectedOption((prev) => {
+        ctx?.setSelectedOption((prev) => {
             return {
                 ...prev,
                 [questionId]: value,
@@ -24,23 +25,21 @@ export default function MCQMain() {
         });
     }
     function next() {
-        setCurrentQn(currentQn + 1);
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
         setShowAnswer(false);
     }
     function previous() {
-        setCurrentQn(currentQn - 1);
+        setCurrentQuestionIndex(currentQuestionIndex - 1);
         setShowAnswer(false);
     }
     function submit() {
         navigate("/app/result");
     }
-    if (!appCTX || appCTX.questionList.length === 0) {
-        appCTX?.updateHeaderDisplay(false);
+    if (!ctx || ctx.questionList.length === 0) {
+        ctx?.updateHeaderDisplay(false);
         return (
             <div>
-                <p>
-                    No questions loaded. Please generate or load a quiz first.
-                </p>
+                <p>{t("quiz.emptyState")}</p>
             </div>
         );
     }
@@ -49,24 +48,26 @@ export default function MCQMain() {
             <Button
                 variant="primary"
                 buttonStyle={styles["previous"]}
-                disabled={appCTX?.questionList.length == 0 || currentQn == 0}
+                disabled={
+                    ctx?.questionList.length == 0 || currentQuestionIndex == 0
+                }
                 onClick={previous}
-                content="Previous"
+                content={t("quiz.previousButton")}
             />
-            {appCTX && currentQn == appCTX?.questionList.length - 1 ? (
+            {ctx && currentQuestionIndex == ctx?.questionList.length - 1 ? (
                 <Button
                     buttonStyle={styles["submit"]}
                     variant="primary"
                     onClick={submit}
-                    content="SUBMIT"
+                    content={t("quiz.submitButton")}
                 />
             ) : (
                 <Button
                     buttonStyle={styles["next"]}
                     variant="primary"
-                    disabled={appCTX?.questionList.length == 0}
+                    disabled={ctx?.questionList.length == 0}
                     onClick={next}
-                    content="Next"
+                    content={t("quiz.nextButton")}
                 />
             )}
         </div>
@@ -74,20 +75,18 @@ export default function MCQMain() {
     return (
         <div className={styles["body"]}>
             <div className={styles["container"]}>
-                {/* <div>Progress</div> */}
                 <Button
                     variant="primary"
                     buttonStyle={styles["back"]}
                     onClick={() => navigate(-1)}
-                    content="Back"
+                    content={t("quiz.backButton")}
                 />
-                {/* <Button onClick={() => setShowAnswer(true)} content="show" /> */}
                 <MCQ
-                    question={appCTX.questionList[currentQn]}
+                    question={ctx.questionList[currentQuestionIndex]}
                     onOptionClick={onOptionClick}
                     optionsSelected={
-                        appCTX.optionsSelected[
-                            appCTX.questionList[currentQn]["id"]
+                        ctx.optionsSelected[
+                            ctx.questionList[currentQuestionIndex]["id"]
                         ]
                     }
                     showAnswer={showAnswer}

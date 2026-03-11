@@ -9,13 +9,13 @@ import { createContext } from "react";
 export const appContext = createContext<appContextType | null>(null);
 
 export default function App() {
-    const [showHeader, updateHeaderDisplay] = useState<boolean>(false);
+    const [isHeaderHidden, updateHeaderDisplay] = useState<boolean>(false);
     const [rawText, updateRawText] = useState<string>("");
     const [questionList, setQuestionsList] = useState<question[]>([]);
     const [optionsSelected, setSelectedOption] = useState<
         Record<string, string>
     >({});
-    const header = showHeader ? null : <Header />;
+    const headerElement = isHeaderHidden ? null : <Header />;
     return (
         <>
             <appContext.Provider
@@ -29,7 +29,7 @@ export default function App() {
                     setSelectedOption,
                 }}
             >
-                {header}
+                {headerElement}
                 <Outlet></Outlet>
             </appContext.Provider>
         </>
