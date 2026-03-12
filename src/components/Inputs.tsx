@@ -10,11 +10,13 @@ type NumberOptions = {
 };
 type FileOptions = {
     inputType: "file";
+    acceptTypes: string;
 };
 type TextOptions = {
     inputType: "text";
     styleClass: string;
     placeholderContent?: string;
+    blurTextBox?: boolean;
     // FIXME: can have default type
 };
 import styles from "/src/styles/inputs.module.css";
@@ -81,9 +83,15 @@ export default function Inputs({
                 id={name}
                 name={name}
                 type="file"
-                accept=""
+                accept={InputOptions.acceptTypes}
                 onChange={onChange}
             ></input>
+        );
+        return (
+            <label className={styleClass}>
+                {labelContent}
+                {inputDiv}
+            </label>
         );
     } else if (InputOptions.inputType == "text") {
         inputDiv = (
@@ -92,6 +100,7 @@ export default function Inputs({
                 placeholder={InputOptions.placeholderContent}
                 id={name}
                 onChange={onChange}
+                data-blur={InputOptions.blurTextBox}
             ></textarea>
         );
     }

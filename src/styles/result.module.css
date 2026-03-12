@@ -2,7 +2,36 @@
     display: block;
     height: 100vh;
     padding: 2rem;
+    padding-top: 5px;
 }
 .container h1 {
     text-align: center;
+}
+.header {
+    display: flex;
+}
+.header h1 {
+    flex: 1;
+}
+.copy,
+.download {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: larger;
+    color: rgba(0, 0, 0, 0.5);
+    font-family: "gen-quiz";
+}
+.copy:hover,
+.download:hover {
+    color: rgba(0, 0, 0, 0.7);
+}
+.copy::before {
+    content: "\e906";
+}
+.download::before {
+    content: "\e907";
+}
+.copied::before {
+    content: "\e900";
 }

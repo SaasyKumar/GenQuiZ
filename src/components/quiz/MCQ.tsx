@@ -13,7 +13,9 @@ export default function MCQ({
     showAnswer?: boolean;
 }) {
     let buttonClassName = styles["options"];
-    buttonClassName += showAnswer ? "" : " " + styles["selectable-options"];
+    buttonClassName += showAnswer
+        ? ` ${styles["not-selectable"]}`
+        : ` ${styles["selectable-options"]}`;
     const options = Object.keys(question["options"]).map((key) => {
         const selected =
             optionsSelected && optionsSelected == key ? true : false;

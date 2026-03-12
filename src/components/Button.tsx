@@ -2,6 +2,7 @@ import styles from "/src/styles/button.module.css";
 export default function Button({
     onClick,
     variant,
+    titleContent,
     content,
     disabled,
     isSelected,
@@ -11,6 +12,7 @@ export default function Button({
 }: {
     onClick?: React.MouseEventHandler<HTMLDivElement>;
     variant?: string;
+    titleContent?: string;
     content: string;
     disabled?: boolean;
     isSelected?: boolean;
@@ -35,6 +37,7 @@ export default function Button({
         <>
             <div
                 className={classString}
+                title={titleContent}
                 onClick={(ev) => {
                     onClick?.(ev);
                 }}

@@ -60,13 +60,18 @@
     },
     "quiz": {
         "emptyState": "No questions found. Please generate a quiz or parse one from text first.",
-        "backButton": "← Back",
+        "backButton": "Back",
         "previousButton": "Previous",
         "nextButton": "Next",
         "submitButton": "Submit Quiz"
     },
     "result": {
         "heading": "Your Results",
-        "subheading": "Review your answers below. Correct answers are highlighted."
+        "subheading": "Review your answers below. Correct answers are highlighted.",
+        "copyQuestions": "Copy Questions",
+        "downloadQuestions": "Download as txt file"
+    },
+    "button": {
+        "uploadFile": "Upload File"
     }
 }

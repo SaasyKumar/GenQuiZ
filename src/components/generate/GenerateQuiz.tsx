@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 
 function GenerateQuiz() {
     const { t } = useTranslation();
+    const maximumQuestions = 10;
     const [text, updateText] = useState<string>("");
     const [difficultyLevel, setDifficultyLevel] = useState<string>("Medium");
     const [questionCount, setQuestionCount] = useState<string>("5");
@@ -44,7 +45,7 @@ function GenerateQuiz() {
         if (isNaN(num)) {
             num = 5;
         }
-        const clamped = Math.max(5, Math.min(25, num));
+        const clamped = Math.max(5, Math.min(maximumQuestions, num));
         setQuestionCount(String(clamped));
     }
     return (

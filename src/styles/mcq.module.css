@@ -11,12 +11,30 @@
     border: 1px solid rgba(56, 85, 247, 0.8);
     background-color: rgba(56, 85, 247, 0.3);
 }
+.not-selectable.options {
+    cursor: unset;
+}
 .selectable-options:hover {
     border: 1px solid rgba(0, 0, 0, 0.8);
+}
+.options[data-correct="true"],
+.options[data-wrong="true"] {
+    display: flex;
+    justify-content: space-between;
 }
 .options[data-correct="true"] {
     background-color: rgba(4, 254, 4, 0.47);
 }
+.options[data-correct="true"]::after {
+    opacity: 0.5;
+    font-family: "gen-quiz";
+    content: "\e900";
+}
 .options[data-wrong="true"] {
     background-color: rgba(241, 33, 33, 0.485);
+}
+.options[data-wrong="true"]::after {
+    font-family: "gen-quiz";
+    content: "\e905";
+    opacity: 0.5;
 }

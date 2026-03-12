@@ -35,6 +35,9 @@
     padding: 1rem;
     flex: 1;
 }
+.quiz-input[data-blur="true"] {
+    filter: blur(3px);
+}
 .submit-button,
 .load-button {
     margin-top: 10px;
@@ -48,4 +51,27 @@
     content: "\e997";
     font-family: "gen-quiz";
     margin-right: 5px;
+}
+.label-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 4px;
+}
+.label-div h4 {
+    margin: 0;
+}
+.file-input {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #4f46e5;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.file-input:hover {
+    background-color: rgb(52, 44, 192);
+}
+.file-input input {
+    display: none;
 }
