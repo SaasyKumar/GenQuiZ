@@ -1,3 +1,7 @@
+export type InputChangeEvent =
+    | React.ChangeEvent<HTMLInputElement>
+    | React.ChangeEvent<HTMLSelectElement>
+    | React.ChangeEvent<HTMLTextAreaElement>;
 type SelectOptions = {
     inputType: "select";
     option: string[];
@@ -19,6 +23,10 @@ type TextOptions = {
     blurTextBox?: boolean;
     // FIXME: can have default type
 };
+type CheckBox = {
+    inputType: "checkbox";
+    isChecked: boolean;
+};
 import styles from "/src/styles/inputs.module.css";
 export default function Inputs({
     name,
@@ -31,13 +39,13 @@ export default function Inputs({
     name: string;
     labelContent?: string;
     styleClass?: string;
-    InputOptions: SelectOptions | NumberOptions | FileOptions | TextOptions;
-    onChange: (
-        ev:
-            | React.ChangeEvent<HTMLInputElement>
-            | React.ChangeEvent<HTMLSelectElement>
-            | React.ChangeEvent<HTMLTextAreaElement>,
-    ) => void;
+    InputOptions:
+        | SelectOptions
+        | NumberOptions
+        | FileOptions
+        | TextOptions
+        | CheckBox;
+    onChange: ((ev: InputChangeEvent) => void) | (() => void);
     defaultValue?: string;
 }) {
     let inputDiv = null;
@@ -102,6 +110,20 @@ export default function Inputs({
                 onChange={onChange}
                 data-blur={InputOptions.blurTextBox}
             ></textarea>
+        );
+    } else if (InputOptions.inputType == "checkbox") {
+        inputDiv = (
+            <input
+                id={name}
+                name={name}
+                type="checkbox"
+                onChange={onChange}
+            ></input>
+        );
+        return (
+            <label className={styleClass} data-checked={InputOptions.isChecked}>
+                {inputDiv}
+            </label>
         );
     }
     return (

@@ -17,7 +17,7 @@ function GenerateQuiz() {
     const ctx = useContext(appContext);
     const navigate = useNavigate();
     useEffect(() => {
-        ctx?.updateHeaderDisplay(false);
+        ctx?.updateHeaderHideState(false);
     }, [ctx]);
     async function submitToBedrock() {
         const response = await fetch(
@@ -36,8 +36,9 @@ function GenerateQuiz() {
         );
         const data = await response.json();
         const responseText = data.body["message"]["content"][0]["text"];
-        ctx?.updateRawText(responseText);
-        ctx?.setQuestionsList(extractFromAikenFormat(responseText));
+        const extract = extractFromAikenFormat(responseText);
+        ctx?.updateRawText(extract[1]);
+        ctx?.setQuestionsList(extract[0]);
         navigate("/app/quiz");
     }
     function handleBlur() {

@@ -13,7 +13,7 @@ export default function MCQMain() {
     const ctx = useContext(appContext);
     const navigate = useNavigate();
     useEffect(() => {
-        ctx?.updateHeaderDisplay(true);
+        ctx?.updateHeaderHideState(true);
     }, [ctx]);
 
     function onOptionClick(value: string, questionId: string) {
@@ -33,10 +33,11 @@ export default function MCQMain() {
         setShowAnswer(false);
     }
     function submit() {
+        ctx?.updateHeaderHideState(false);
         navigate("/app/result");
     }
     if (!ctx || ctx.questionList.length === 0) {
-        ctx?.updateHeaderDisplay(false);
+        ctx?.updateHeaderHideState(false);
         return (
             <div>
                 <p>{t("quiz.emptyState")}</p>

@@ -68,7 +68,7 @@
     "result": {
         "heading": "Your Results",
         "subheading": "Review your answers below. Correct answers are highlighted.",
-        "copyQuestions": "Copy Questions",
+        "copyQuestions": "Copy Selected Questions",
         "downloadQuestions": "Download as txt file"
     },
     "button": {

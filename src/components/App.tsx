@@ -9,8 +9,8 @@ import { createContext } from "react";
 export const appContext = createContext<appContextType | null>(null);
 
 export default function App() {
-    const [isHeaderHidden, updateHeaderDisplay] = useState<boolean>(false);
-    const [rawText, updateRawText] = useState<string>("");
+    const [isHeaderHidden, updateHeaderHideState] = useState<boolean>(false);
+    const [rawText, updateRawText] = useState<Record<string, string[]>>({});
     const [questionList, setQuestionsList] = useState<question[]>([]);
     const [optionsSelected, setSelectedOption] = useState<
         Record<string, string>
@@ -20,7 +20,7 @@ export default function App() {
         <>
             <appContext.Provider
                 value={{
-                    updateHeaderDisplay,
+                    updateHeaderHideState,
                     rawText,
                     updateRawText,
                     questionList,

@@ -4,15 +4,17 @@ function isQuestionStart(line: string): boolean {
     return false;
 }
 
-function extractFromAikenFormat(data: string) {
+function extractFromAikenFormat(
+    data: string,
+): [question[], Record<string, string[]>] {
     const allLines = data.trim().replace(/\r\n/g, "\n").split("\n");
-    const blocks: string[][] = [];
+    const blocks: Record<string, string[]> = {};
     let current: string[] | null = null;
 
     for (const line of allLines) {
         if (isQuestionStart(line)) {
             current = [line];
-            blocks.push(current);
+            blocks[crypto.randomUUID()] = current;
         } else if (current !== null) {
             current.push(line);
         }
@@ -20,7 +22,8 @@ function extractFromAikenFormat(data: string) {
 
     const optionPattern = /^([a-zA-Z])[).] (.+)/;
 
-    const result: question[] = blocks.map((lines) => {
+    const result: question[] = Object.keys(blocks).map((key) => {
+        const lines = blocks[key];
         const question = lines[0].replace(/^Question:\s*/i, "").trim();
 
         const options: Record<string, string> = {};
@@ -54,7 +57,7 @@ function extractFromAikenFormat(data: string) {
         }
 
         return {
-            id: crypto.randomUUID(),
+            id: key,
             question,
             options,
             answer,
@@ -62,9 +65,22 @@ function extractFromAikenFormat(data: string) {
         };
     });
 
-    return result;
+    return [result, blocks];
 }
 
+function formatToAikenFormat(
+    selectedIDs: Record<string, boolean>,
+    blockSet: Record<string, string[]>,
+) {
+    let text: string = "";
+    Object.keys(selectedIDs).map((key) => {
+        if (selectedIDs[key] == true) {
+            text += blockSet[key].join("\n");
+            text += "\n\n";
+        }
+    });
+    return text;
+}
 type question = {
     id: string;
     question: string;
@@ -73,5 +89,5 @@ type question = {
     explanation: string;
 };
 
-export { extractFromAikenFormat };
+export { extractFromAikenFormat, formatToAikenFormat };
 export type { question };

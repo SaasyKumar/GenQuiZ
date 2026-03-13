@@ -3,20 +3,39 @@ import { useContext, useState } from "react";
 import styles from "/src/styles/result.module.css";
 import MCQ from "./MCQ";
 import Button from "../Button";
-import Header from "../Header";
+import { formatToAikenFormat } from "./../../utils/extractQn";
 import { useTranslation } from "react-i18next";
 
 export default function Result() {
     const { t } = useTranslation();
     const ctx = useContext(appContext);
+    const questionIds: Record<string, boolean> = {};
+    if (ctx) {
+        Object.keys(ctx.rawText).map((key) => {
+            questionIds[key] = true;
+        });
+    }
+
     const [copied, setCopied] = useState<boolean>(false);
+    const [selectedQnID, updateSelectedQnID] =
+        useState<Record<string, boolean>>(questionIds);
+
+    const onCheck = (ev: React.ChangeEvent<HTMLInputElement>) => {
+        updateSelectedQnID((prev) => {
+            return {
+                ...prev,
+                [ev.target.id]: !prev[ev.target.id],
+            };
+        });
+    };
     const copyToClipboard = async () => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
         if (ctx?.rawText) {
+            const text = formatToAikenFormat(selectedQnID, ctx.rawText);
             try {
-                await navigator.clipboard.writeText(ctx.rawText);
+                await navigator.clipboard.writeText(text);
                 console.log("Copied!");
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
             } catch (err) {
                 console.error("Failed to copy:", err);
             }
@@ -24,7 +43,8 @@ export default function Result() {
     };
     const downloadTxt = () => {
         if (ctx?.rawText) {
-            const blob = new Blob([ctx.rawText], { type: "text/plain" });
+            const text = formatToAikenFormat(selectedQnID, ctx.rawText);
+            const blob = new Blob([text], { type: "text/plain" });
             const url = URL.createObjectURL(blob);
 
             const a = document.createElement("a");
@@ -41,13 +61,14 @@ export default function Result() {
                 question={item}
                 onOptionClick={() => {}}
                 optionsSelected={ctx.optionsSelected[item["id"]]}
-                showAnswer={true}
+                isResult={true}
+                isChecked={selectedQnID[item["id"]]}
+                onCheck={onCheck}
             ></MCQ>
         );
     });
     return (
         <>
-            <Header />
             <div className={styles["container"]}>
                 <header className={styles["header"]}>
                     <h1>{t("result.heading")}</h1>

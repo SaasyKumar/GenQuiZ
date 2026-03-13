@@ -1,4 +1,4 @@
-import { type question, extractFromAikenFormat } from "../utils/extractQn";
+import { extractFromAikenFormat } from "../utils/extractQn";
 import parseMCQ from "../utils/simple";
 
 const testTxt: string = `QUESTION: What is the primary purpose of the Immediate Test method?
@@ -40,10 +40,9 @@ C. Converting explanations into content
 D. Recording and reviewing explanations
 ANSWER: B
 EXPLANATION: The Converge method likely focuses on integrating and combining different learning techniques to enhance understanding and retention.`;
-const test: question[] = extractFromAikenFormat(testTxt);
-export { test };
+const extract = extractFromAikenFormat(testTxt);
 export default function App() {
-    console.log(extractFromAikenFormat(testTxt));
+    console.log(extract[1]);
     console.log(parseMCQ(testTxt));
     return (
         <>

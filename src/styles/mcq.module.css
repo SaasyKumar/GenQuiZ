@@ -1,3 +1,33 @@
+.result-qn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 10px;
+}
+.checkbox {
+    display: flex;
+    width: 15px;
+    height: 15px;
+    color: rgb(50, 69, 245);
+    cursor: pointer;
+}
+.checkbox:hover {
+    color: rgb(39, 56, 214);
+}
+.checkbox::before,
+.checkbox[data-checked="true"]::before {
+    font-family: "gen-quiz";
+    align-self: center;
+}
+.checkbox::before {
+    content: "\ea53";
+}
+.checkbox[data-checked="true"]::before {
+    content: "\ea52";
+}
+.checkbox input {
+    display: none;
+}
 .correct {
     background-color: green;
 }

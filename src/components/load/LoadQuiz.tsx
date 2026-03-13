@@ -15,11 +15,12 @@ export default function LoadQuiz() {
     const navigate = useNavigate();
     const ctx = useContext(appContext);
     useEffect(() => {
-        ctx?.updateHeaderDisplay(false);
+        ctx?.updateHeaderHideState(false);
     }, []);
     function loadQuiz() {
-        ctx?.setQuestionsList(extractFromAikenFormat(text));
-        ctx?.updateRawText(text);
+        const extract = extractFromAikenFormat(text);
+        ctx?.setQuestionsList(extract[0]);
+        ctx?.updateRawText(extract[1]);
         navigate("/app/quiz");
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -27,8 +28,9 @@ export default function LoadQuiz() {
         const file = e.target.files?.[0];
         if (!file) return;
         const text = await file.text();
-        ctx?.setQuestionsList(extractFromAikenFormat(text));
-        ctx?.updateRawText(text);
+        const extract = extractFromAikenFormat(text);
+        ctx?.setQuestionsList(extract[0]);
+        ctx?.updateRawText(extract[1]);
         navigate("/app/quiz");
     };
     return (
