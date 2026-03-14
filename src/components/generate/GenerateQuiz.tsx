@@ -35,7 +35,7 @@ function GenerateQuiz() {
             },
         );
         const data = await response.json();
-        const responseText = data.body["message"]["content"][0]["text"];
+        const responseText = JSON.parse(data.body)["output"];
         const extract = extractFromAikenFormat(responseText);
         ctx?.updateRawText(extract[1]);
         ctx?.setQuestionsList(extract[0]);
