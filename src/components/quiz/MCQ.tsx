@@ -9,7 +9,7 @@ export default function MCQ({
     showAnswer = false,
     isResult = false,
     isChecked = false,
-    onCheck,
+    onCheck = () => {},
 }: {
     question: question;
     onOptionClick?: (key: string, id: string) => void;
@@ -17,7 +17,7 @@ export default function MCQ({
     showAnswer?: boolean;
     isResult?: boolean;
     isChecked?: boolean;
-    onCheck: ((ev: InputChangeEvent) => void) | (() => void);
+    onCheck?: ((ev: InputChangeEvent) => void) | (() => void);
 }) {
     let buttonClassName = styles["options"];
     if (isResult == true) {
@@ -54,7 +54,7 @@ export default function MCQ({
             />
         );
     });
-     
+
     const questionDiv =
         isResult == true ? (
             <div className={styles["result-qn"]}>

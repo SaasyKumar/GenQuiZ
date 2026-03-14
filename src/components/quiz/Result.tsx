@@ -5,6 +5,7 @@ import MCQ from "./MCQ";
 import Button from "../Button";
 import { formatToAikenFormat } from "./../../utils/extractQn";
 import { useTranslation } from "react-i18next";
+import { type InputChangeEvent } from "../Inputs";
 
 export default function Result() {
     const { t } = useTranslation();
@@ -20,7 +21,7 @@ export default function Result() {
     const [selectedQnID, updateSelectedQnID] =
         useState<Record<string, boolean>>(questionIds);
 
-    const onCheck = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    const onCheck = (ev: InputChangeEvent) => {
         updateSelectedQnID((prev) => {
             return {
                 ...prev,
