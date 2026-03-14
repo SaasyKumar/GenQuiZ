@@ -46,11 +46,26 @@
     "generate": {
         "pageTitle": "Generate a New Quiz",
         "difficultyLabel": "Difficulty Level",
-        "difficultyOptions": ["Child", "Easy", "Medium", "Hard"],
+        "difficultyOptions": ["Easy", "Medium", "Hard"],
         "numQuestionsLabel": "Number of Questions",
         "pasteLabel": "Paste your study material below:",
         "placeholder": "Paste your notes, textbook excerpts, or articles here — GenQuiZ will do the rest...",
-        "submitButton": "Generate Quiz"
+        "submitButton": "Generate Quiz",
+        "errors": {
+            "emptyInput": "Please paste some study material or upload a file before generating.",
+            "fileRead": "Could not read the uploaded file. Please try a different file.",
+            "network": "Could not reach the server. Please check your connection and try again.",
+            "serverError": "The server encountered an error. Please try again in a moment.",
+            "rateLimit": "Too many requests. Please wait a moment and try again.",
+            "httpError": "Request failed (HTTP {{status}}). Please try again.",
+            "emptyResponse": "The AI returned an empty response. Please try again or rephrase your content.",
+            "noQuestions": "No questions could be parsed from the response. Try adding more detailed content.",
+            "inputTooLong": "Your content is too long for the AI to process. Please shorten it and try again.",
+            "unknown": "Something went wrong. Please try again."
+        },
+        "warnings": {
+            "truncated": "Your content was too long and was automatically shortened before generation. Questions are based on the first portion of your material."
+        }
     },
     "parse": {
         "pageTitle": "Parse Quiz from Text",
@@ -63,13 +78,23 @@
         "backButton": "Back",
         "previousButton": "Previous",
         "nextButton": "Next",
-        "submitButton": "Submit Quiz"
+        "submitButton": "Submit Quiz",
+        "attemptLabel": "Attempt {{n}}",
+        "retryLabel": "Retry {{n}}",
+        "retryModal": {
+            "title": "You missed a few!",
+            "body": "You got {{wrongCount}} out of {{total}} questions wrong ({{wrongPct}}%). Want to retry just those questions before seeing your results?",
+            "hint": "Retry mode will start a new quiz with only your incorrect answers — perfect for targeted practice.",
+            "viewResults": "View Results",
+            "retryWrong": "Retry Wrong Answers"
+        }
     },
     "result": {
         "heading": "Your Results",
         "subheading": "Review your answers below. Correct answers are highlighted.",
         "copyQuestions": "Copy Selected Questions",
-        "downloadQuestions": "Download as txt file"
+        "downloadQuestions": "Download as txt file",
+        "questionCol": "Question"
     },
     "button": {
         "uploadFile": "Upload File"
@@ -135,28 +160,28 @@
                 "phase": "API Call",
                 "title": "Your text travels to AWS Lambda",
                 "description": "The app POSTs your content, difficulty level, and question count to an AWS API Gateway endpoint backed by a Node.js Lambda function.",
-                "detail": "The Lambda builds a strict system prompt instructing Amazon Nova Pro to produce questions in Aiken format — a plain-text MCQ standard used widely in e-learning. Token budget is calculated as (questionCount × 1200), capped at 10,000, ensuring the model has enough room without wasting resources.",
+                "detail": "The Lambda builds a strict system prompt instructing Amazon Nova Pro to produce questions in Aiken format.",
                 "tag": "lambda.js"
             },
             "step3": {
                 "phase": "AI Generation",
                 "title": "Amazon Nova Pro writes the questions",
-                "description": "AWS Bedrock invokes the amazon.nova-pro-v1:0 model with your text as the user message and the format instructions as a system prompt. The model returns questions in this exact structure: QUESTION → options A–D → ANSWER → EXPLANATION.",
-                "detail": "Inference parameters (temperature 0.7, topP 0.9, topK 20) are tuned for factual accuracy with a touch of creative phrasing — keeping questions clear without being robotic.",
+                "description": "AWS Bedrock invokes the amazon.nova-pro-v1:0 model with your text as the user message and the format instructions as a system prompt.",
+                "detail": "Inference parameters are tuned for factual accuracy with a touch of creative phrasing.",
                 "tag": "lambda.js → Bedrock"
             },
             "step4": {
                 "phase": "Parsing",
                 "title": "Aiken format is parsed into structured data",
-                "description": "The raw model output is handed to extractFromAikenFormat() — a pure TypeScript parser that splits the text line-by-line, groups lines into question blocks by UUID, and maps each block into a typed question object with fields: question, options (keyed a–d), answer, and explanation.",
-                "detail": "The same parser powers the Load Quiz path — so whether AI generates the text or you paste it yourself, all downstream quiz logic is identical. The raw blocks are also preserved as Record<string, string[]> so you can copy or download the original Aiken text later.",
+                "description": "The raw model output is handed to extractFromAikenFormat() — a pure TypeScript parser.",
+                "detail": "The same parser powers the Load Quiz path.",
                 "tag": "extractQn.ts"
             },
             "step5": {
                 "phase": "Quiz & Results",
                 "title": "You take the quiz, then export what you want",
-                "description": "MCQMain renders one question at a time, tracking your selected options in global context. On submit, the Result page shows every question with colour-coded correct/wrong highlights and the AI's explanation.",
-                "detail": "You can cherry-pick questions using checkboxes, then copy the selected set to clipboard or download them as a .txt file — ready to paste into an LMS, share with classmates, or re-load into GenQuiZ another day.",
+                "description": "MCQMain renders one question at a time, tracking your selected options in global context.",
+                "detail": "You can cherry-pick questions using checkboxes, then copy the selected set to clipboard or download them as a .txt file.",
                 "tag": "MCQMain.tsx → Result.tsx"
             }
         },

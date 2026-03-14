@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { type question } from "./../utils/extractQn";
 import Sidebar from "./Sidebar";
-import { type appContextType } from "./Context";
+import { type appContextType, type QuizAttempt } from "./Context";
 import { createContext } from "react";
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -15,6 +15,15 @@ export default function App() {
     const [optionsSelected, setSelectedOption] = useState<
         Record<string, string>
     >({});
+    const [quizHistory, setQuizHistory] = useState<QuizAttempt[]>([]);
+
+    const addQuizAttempt = useCallback((attempt: QuizAttempt) => {
+        setQuizHistory((prev) => [...prev, attempt]);
+    }, []);
+
+    const clearQuizHistory = useCallback(() => {
+        setQuizHistory([]);
+    }, []);
 
     return (
         <appContext.Provider
@@ -26,6 +35,9 @@ export default function App() {
                 setQuestionsList,
                 optionsSelected,
                 setSelectedOption,
+                quizHistory,
+                addQuizAttempt,
+                clearQuizHistory,
             }}
         >
             <div
@@ -37,7 +49,7 @@ export default function App() {
             >
                 <Sidebar
                     collapsed={isSidebarCollapsed}
-                    onExpand={() => setSidebarCollapsed(false)}
+                    onToggle={() => setSidebarCollapsed((v) => !v)}
                 />
                 <main
                     style={{

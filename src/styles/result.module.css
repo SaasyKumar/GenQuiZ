@@ -1,17 +1,19 @@
 .page {
     flex: 1;
     background: var(--bg-2);
-    padding: 2.5rem 1.5rem;
+    padding: 2.5rem 2.5rem;
     overflow-y: auto;
     font-family: var(--ff-body);
 }
 .container {
-    max-width: 700px;
+    max-width: 960px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 0;
 }
+
+/* ── Score card ── */
 .score-card {
     background: var(--bg-card);
     border: 1px solid var(--divider);
@@ -23,7 +25,6 @@
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    /* Blue left accent — score card is a summary/info block */
     border-left: 4px solid var(--blue);
 }
 .score-left h1 {
@@ -45,12 +46,14 @@
     gap: 10px;
     flex-shrink: 0;
 }
-/* Blue score — the number itself is informational data */
 .score-badge {
     font-family: var(--ff-display);
     font-size: 2.2rem;
     color: var(--blue);
     line-height: 1;
+}
+.score-badge-latest {
+    color: var(--accent);
 }
 .score-denom {
     font-size: 0.78rem;
@@ -61,6 +64,39 @@
     align-self: flex-end;
     padding-bottom: 4px;
 }
+
+/* Multi-attempt score chips */
+.score-multi {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    flex-shrink: 0;
+}
+.score-chip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: var(--bg-2);
+    border: 1px solid var(--divider);
+    border-radius: 10px;
+    padding: 8px 14px;
+    min-width: 72px;
+}
+.score-chip-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    white-space: nowrap;
+}
+.score-chip .score-badge {
+    font-size: 1.4rem;
+}
+
+/* ── Toolbar ── */
 .toolbar {
     display: flex;
     align-items: center;
@@ -98,7 +134,6 @@
     user-select: none;
     letter-spacing: 0.01em;
 }
-/* Blue copy — copying is an informational action */
 .copy-btn {
     background: var(--bg-card);
     border: 1.5px solid var(--divider);
@@ -123,7 +158,6 @@
 .copy-btn.copied::before {
     content: "\e900";
 }
-/* Green download — saving/completing is a success action */
 .download-btn {
     background: var(--accent);
     border: 1.5px solid var(--accent);
@@ -139,6 +173,8 @@
     background: var(--accent-hover);
     border-color: var(--accent-hover);
 }
+
+/* ── Original single-attempt question card ── */
 .question-card {
     background: var(--bg-card);
     border: 1px solid var(--divider);
@@ -146,4 +182,240 @@
     padding: 1.5rem 1.75rem;
     margin-bottom: 12px;
     box-shadow: var(--shadow-sm);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   COMPARISON VIEW  (multi-attempt)
+   Layout per card:
+     ┌──────────────────────────────────────┬──┐
+     │  ▸  Question text                    │ ☑│  ← question row
+     ├──────────────────────────────────────┴──┤
+     │  Attempt 1  [pill]   Attempt 2  [pill]  │  ← answer strip
+     ├─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┤
+     │  (expanded: options + explanation)      │
+     └─────────────────────────────────────────┘
+   ═══════════════════════════════════════════════════════════════ */
+
+.cmp-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* card wrapper for each question */
+.cmp-row {
+    background: var(--bg-card);
+    border: 1px solid var(--divider);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+/* outer row: question text + checkbox side by side */
+.cmp-question-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+}
+
+/* question text — grows to fill, clickable to expand */
+.cmp-question {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 1rem 1rem 0.9rem 1.25rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.55;
+    user-select: none;
+    transition: background 0.12s;
+    min-width: 0;
+}
+.cmp-question:hover {
+    background: var(--bg-2);
+}
+.cmp-chevron {
+    flex-shrink: 0;
+    font-size: 0.8rem;
+    color: var(--text-3);
+    margin-top: 3px;
+}
+
+/* export checkbox — aligns with the question top-right, matches mcq.module.css style */
+.cmp-checkbox {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin: 1.05rem 1.25rem 0 0;
+    transition: color 0.15s;
+}
+.cmp-checkbox:hover {
+    color: var(--blue-hover);
+}
+.cmp-checkbox::before,
+.cmp-checkbox[data-checked="true"]::before {
+    font-family: "gen-quiz";
+    display: block;
+    font-size: 1.15rem;
+    line-height: 1;
+}
+.cmp-checkbox::before {
+    content: "\ea53";
+    color: var(--uncheck-color);
+}
+.cmp-checkbox[data-checked="true"]::before {
+    content: "\ea52";
+    color: var(--blue);
+}
+.cmp-checkbox input {
+    display: none;
+}
+
+/* answer strip — full width row, one cell per attempt */
+.cmp-attempts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    border-top: 1px solid var(--divider);
+    background: var(--bg-2);
+}
+
+/* one attempt cell: label on top, pill below */
+.cmp-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0.65rem 1.25rem 0.75rem;
+    border-right: 1px solid var(--divider);
+    min-width: 160px;
+    flex: 1;
+}
+.cmp-cell:last-child {
+    border-right: none;
+}
+
+/* attempt label ("Attempt 1", "Retry 1") */
+.cmp-cell-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-3);
+}
+
+/* ─── pill badge ─── */
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1.4;
+    max-width: 100%;
+    word-break: break-word;
+    white-space: normal;
+}
+.pill-correct {
+    background: var(--correct-bg);
+    color: var(--correct-text);
+    border: 1px solid var(--correct-border);
+}
+.pill-wrong {
+    background: var(--wrong-bg);
+    color: var(--wrong-text);
+    border: 1px solid var(--wrong-border);
+}
+.pill-skipped {
+    background: var(--bg-3);
+    color: var(--text-3);
+    border: 1px solid var(--divider);
+    font-style: italic;
+}
+.pill-key {
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+/* expanded detail panel */
+.cmp-expanded {
+    padding: 0.85rem 1.25rem 1rem 2.5rem;
+    border-top: 1px dashed var(--divider);
+    background: var(--bg-2);
+    animation: expandIn 0.18s ease;
+}
+@keyframes expandIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* options list inside expanded */
+.cmp-options {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 0.75rem;
+}
+.cmp-option {
+    font-size: 0.85rem;
+    color: var(--text-2);
+    padding: 6px 10px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg-card);
+    border: 1px solid var(--divider);
+}
+.cmp-option-correct {
+    background: var(--correct-bg);
+    border-color: var(--correct-border);
+    color: var(--correct-text);
+    font-weight: 500;
+}
+.cmp-option-key {
+    font-weight: 700;
+    flex-shrink: 0;
+}
+.cmp-option-tick {
+    margin-left: auto;
+    color: var(--correct-text);
+    font-size: 0.85rem;
+}
+.cmp-explanation {
+    margin: 0;
+    padding: 10px 14px;
+    background: var(--blue-light);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+    color: var(--text-2);
+    line-height: 1.65;
+    font-weight: 300;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+    .page {
+        padding: 1.5rem 1rem;
+    }
+    .cmp-cell {
+        min-width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--divider);
+    }
+    .cmp-cell:last-child {
+        border-bottom: none;
+    }
 }

@@ -14,7 +14,7 @@ const FEATURES = [
     {
         icon: "⚙️",
         heading: "Difficulty Levels",
-        body: "Choose from four levels: Child, Easy, Medium, and Hard. The AI adapts question phrasing and complexity to match your chosen difficulty.",
+        body: "Choose from four levels: Easy, Medium, and Hard. The AI adapts question phrasing and complexity to match your chosen difficulty.",
         tag: "live",
     },
     {

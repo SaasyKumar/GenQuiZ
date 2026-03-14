@@ -125,3 +125,121 @@
     background: var(--green-hover) !important;
     box-shadow: 0 3px 10px rgba(21, 128, 61, 0.25) !important;
 }
+
+/* ── Recursive Test Modal ── */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1.5rem;
+    animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.modal {
+    background: var(--bg-card);
+    border: 1px solid var(--divider);
+    border-radius: 16px;
+    padding: 2.25rem 2.5rem 2rem;
+    max-width: 440px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0;
+    animation: slideUp 0.25s ease;
+}
+@keyframes slideUp {
+    from {
+        transform: translateY(16px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+.modal-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    line-height: 1;
+}
+.modal-title {
+    font-family: var(--ff-display);
+    font-size: 1.45rem;
+    font-weight: 500;
+    color: var(--text);
+    margin: 0 0 0.75rem;
+    line-height: 1.25;
+}
+.modal-body {
+    font-size: 0.9rem;
+    color: var(--text-2);
+    margin: 0 0 0.5rem;
+    line-height: 1.6;
+}
+.modal-hint {
+    font-size: 0.8rem;
+    color: var(--text-3);
+    margin: 0 0 1.75rem;
+    line-height: 1.5;
+    padding: 0.65rem 1rem;
+    background: var(--blue-light);
+    border: 1px solid var(--blue-glow);
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+.modal-btn-secondary,
+.modal-btn-primary {
+    flex: 1;
+    height: 40px;
+    border-radius: var(--radius);
+    font-family: var(--ff-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition:
+        background 0.15s,
+        transform 0.15s,
+        box-shadow 0.15s;
+    letter-spacing: 0.01em;
+}
+.modal-btn-secondary {
+    background: var(--bg-3);
+    color: var(--text-2);
+    border: 1.5px solid var(--divider);
+}
+.modal-btn-secondary:hover {
+    background: var(--bg-2);
+    color: var(--text);
+}
+.modal-btn-primary {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 1px 4px var(--accent-glow);
+}
+.modal-btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--accent-glow);
+}

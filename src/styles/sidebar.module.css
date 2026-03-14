@@ -48,9 +48,56 @@
 .logo:hover {
     opacity: 0.75;
 }
-.collapsed .logo {
-    padding: 0;
+
+/* ── Collapse / Expand toggle button ────────────────── */
+.toggle-btn {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid var(--divider);
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    color: var(--text-3);
+    margin: 0 8px;
+    transition:
+        background 0.12s,
+        color 0.12s,
+        border-color 0.12s;
+}
+.toggle-btn:hover {
+    background: var(--blue-light);
+    color: var(--blue-text);
+    border-color: var(--blue-glow);
+}
+
+/* Arrow chevron — pure CSS, no font dependency */
+.toggle-icon {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* Expanded sidebar → arrow points left (collapse) */
+.toggle-icon-collapse {
+    transform: rotate(-135deg) translate(-1px, 1px);
+}
+/* Collapsed sidebar → arrow points right (expand) */
+.toggle-icon-expand {
+    transform: rotate(45deg) translate(-1px, 1px);
+}
+
+/* When collapsed the toggle is the only thing in the row — centre it */
+.collapsed .logo-row {
+    justify-content: center;
+}
+.collapsed .toggle-btn {
+    margin: 0;
 }
 
 /* ── Section label ──────────────────────────────────── */
@@ -219,7 +266,7 @@
     padding: 0.9rem 0;
 }
 
-/* ── Collapsed theme icon button ────────────────────── */
+/* ── Collapsed theme icon button (sun ☀︎ / moon ☽) ─── */
 .theme-icon-btn {
     width: 32px;
     height: 32px;
@@ -233,21 +280,20 @@
     color: var(--text-2);
     transition:
         background 0.12s,
-        color 0.12s;
+        color 0.12s,
+        border-color 0.12s;
 }
 .theme-icon-btn:hover {
     background: var(--blue-light);
     color: var(--blue-text);
-}
-.theme-icon-collapsed {
-    display: block;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    border: 2px solid currentColor;
+    border-color: var(--blue-glow);
 }
 
-/* Hidden real ThemeToggle */
-.hidden-toggle {
-    display: none;
+/* Force the emoji to render as text (not colour emoji) so CSS color applies */
+.theme-icon {
+    font-size: 1rem;
+    line-height: 1;
+    user-select: none;
+    /* Render as text glyph so currentColor takes effect in dark mode */
+    font-family: monospace;
 }

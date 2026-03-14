@@ -55,7 +55,6 @@
     }
 }
 
-/* Spinner ring */
 .spinner {
     width: 44px;
     height: 44px;
@@ -83,7 +82,95 @@
     font-weight: 400;
 }
 
-/* ── Rest of the form ───────────────────────────────── */
+/* ── Shared banner base ─────────────────────────────── */
+.error-banner,
+.warning-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    margin-bottom: 1.25rem;
+    border-radius: var(--radius);
+    animation: fade-in 0.18s ease;
+}
+
+/* ── Error banner (red) ─────────────────────────────── */
+.error-banner {
+    background: var(--wrong-bg);
+    border: 1.5px solid var(--wrong-border);
+}
+.error-icon::before {
+    font-family: "gen-quiz";
+    content: "\ea0f";
+    font-size: 1rem;
+    color: var(--wrong-text);
+}
+.error-icon {
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+.error-message {
+    flex: 1;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--wrong-text);
+    line-height: 1.5;
+}
+.error-dismiss {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--wrong-text);
+    font-size: 0.75rem;
+    opacity: 0.6;
+    padding: 0;
+    line-height: 1;
+    transition: opacity 0.12s;
+}
+.error-dismiss:hover {
+    opacity: 1;
+}
+
+/* ── Warning banner (amber) ─────────────────────────── */
+.warning-banner {
+    background: var(--blue-light);
+    border: 1.5px solid var(--blue-glow);
+}
+.warning-icon {
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+.warning-icon::before {
+    font-family: "gen-quiz";
+    content: "\ea07";
+    font-size: 1rem;
+    color: var(--blue-text);
+}
+.warning-message {
+    flex: 1;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--blue-text);
+    line-height: 1.5;
+}
+.warning-dismiss {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--blue-text);
+    font-size: 0.75rem;
+    opacity: 0.6;
+    padding: 0;
+    line-height: 1;
+    transition: opacity 0.12s;
+}
+.warning-dismiss:hover {
+    opacity: 1;
+}
+
+/* ── Options row ────────────────────────────────────── */
 .options-1 {
     display: flex;
     gap: 20px;
@@ -95,16 +182,101 @@
 .input {
     width: 100%;
 }
-.options-2 {
-    margin-bottom: 0.5rem;
+
+/* ── Label + file upload row ────────────────────────── */
+.label-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6rem;
 }
-.txt-input-label {
+.label-div h4 {
+    margin: 0;
     font-size: 0.82rem;
     font-weight: 600;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--blue-text);
+    color: var(--text-3);
 }
+.file-upload-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Upload button */
+.file-input {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: var(--blue-light);
+    color: var(--blue-text);
+    border: 1.5px solid var(--blue-glow);
+    border-radius: var(--radius);
+    font-family: var(--ff-body);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.15s,
+        border-color 0.15s,
+        color 0.15s,
+        box-shadow 0.15s;
+    white-space: nowrap;
+}
+.file-input::before {
+    content: "\e9c7";
+    font-family: "gen-quiz";
+    font-size: 0.88rem;
+}
+.file-input:hover {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+    box-shadow: 0 2px 8px var(--blue-glow);
+}
+.file-input input {
+    display: none;
+}
+
+/* File chip */
+.file-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    background: var(--correct-bg);
+    border: 1.5px solid var(--correct-border);
+    border-radius: var(--radius);
+    max-width: 260px;
+}
+.file-chip-name {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--correct-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 200px;
+}
+.file-chip-clear {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--correct-text);
+    font-size: 0.7rem;
+    line-height: 1;
+    opacity: 0.6;
+    padding: 0;
+    transition: opacity 0.12s;
+}
+.file-chip-clear:hover {
+    opacity: 1;
+}
+
+/* ── Textarea ───────────────────────────────────────── */
 .quiz-input {
     width: 100%;
     min-height: 340px;
@@ -133,6 +305,8 @@
 .quiz-input[data-blur="true"] {
     filter: blur(3px);
 }
+
+/* ── Submit button ──────────────────────────────────── */
 .submit-button,
 .load-button {
     margin-top: 1.25rem;
@@ -151,52 +325,4 @@
 .submit-button::before {
     content: "\e997";
     font-family: "gen-quiz";
-}
-.label-div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.6rem;
-}
-.label-div h4 {
-    margin: 0;
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--text-3);
-}
-.file-input {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 7px 14px;
-    background: var(--blue-light);
-    color: var(--blue-text);
-    border: 1.5px solid var(--blue-glow);
-    border-radius: var(--radius);
-    font-family: var(--ff-body);
-    font-size: 0.8rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition:
-        background 0.15s,
-        border-color 0.15s,
-        color 0.15s,
-        box-shadow 0.15s;
-    white-space: nowrap;
-}
-.file-input::before {
-    content: "\e9c7";
-    font-family: "gen-quiz";
-    font-size: 0.9rem;
-}
-.file-input:hover {
-    background: var(--blue);
-    border-color: var(--blue);
-    color: #fff;
-    box-shadow: 0 2px 8px var(--blue-glow);
-}
-.file-input input {
-    display: none;
 }

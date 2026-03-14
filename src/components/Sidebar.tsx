@@ -2,17 +2,19 @@ import styles from "/src/styles/sidebar.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import Icon from "./Icon";
 import ThemeToggle from "./ThemeToggle";
+import { useTheme } from "./ThemeContext";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 
 interface SidebarProps {
     collapsed: boolean;
-    onExpand: () => void;
+    onToggle: () => void;
 }
 
-export default function Sidebar({ collapsed, onExpand }: SidebarProps) {
+export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const { theme, toggleTheme } = useTheme();
     const [tooltip, setTooltip] = useState<{ label: string; y: number } | null>(
         null,
     );
@@ -36,7 +38,6 @@ export default function Sidebar({ collapsed, onExpand }: SidebarProps) {
     };
 
     function handleNavClick(link: string) {
-        onExpand();
         navigate(link);
     }
 
@@ -82,17 +83,28 @@ export default function Sidebar({ collapsed, onExpand }: SidebarProps) {
         <aside
             className={`${styles["sidebar"]} ${collapsed ? styles["collapsed"] : ""}`}
         >
-            {/* Hidden ThemeToggle for collapsed mode click passthrough */}
-            <div className={styles["hidden-toggle"]}>
-                <ThemeToggle />
-            </div>
-
             <div className={styles["sidebar-top"]}>
-                {/* Logo */}
+                {/* Logo row: logo (expanded only) + collapse/expand toggle */}
                 <div className={styles["logo-row"]}>
-                    <NavLink to="/" className={styles["logo"]}>
-                        <Icon />
-                    </NavLink>
+                    {!collapsed && (
+                        <NavLink to="/" className={styles["logo"]}>
+                            <Icon />
+                        </NavLink>
+                    )}
+                    <button
+                        className={styles["toggle-btn"]}
+                        onClick={onToggle}
+                        title={
+                            collapsed ? "Expand sidebar" : "Collapse sidebar"
+                        }
+                        aria-label={
+                            collapsed ? "Expand sidebar" : "Collapse sidebar"
+                        }
+                    >
+                        <span
+                            className={`${styles["toggle-icon"]} ${collapsed ? styles["toggle-icon-expand"] : styles["toggle-icon-collapse"]}`}
+                        />
+                    </button>
                 </div>
 
                 {!collapsed && (
@@ -102,28 +114,29 @@ export default function Sidebar({ collapsed, onExpand }: SidebarProps) {
                 <nav className={styles["nav"]}>{navigation}</nav>
             </div>
 
+            {/* Bottom: full ThemeToggle when expanded, sun/moon icon when collapsed */}
             <div className={styles["sidebar-bottom"]}>
                 {collapsed ? (
                     <button
                         className={styles["theme-icon-btn"]}
-                        title="Toggle theme"
+                        onClick={toggleTheme}
+                        title={
+                            theme === "light"
+                                ? "Switch to dark mode"
+                                : "Switch to light mode"
+                        }
                         aria-label="Toggle theme"
-                        onClick={() => {
-                            const btn =
-                                document.querySelector<HTMLButtonElement>(
-                                    `.${styles["hidden-toggle"]} button`,
-                                );
-                            btn?.click();
-                        }}
                     >
-                        <span className={styles["theme-icon-collapsed"]} />
+                        <span className={styles["theme-icon"]}>
+                            {theme === "light" ? "☀︎" : "☽"}
+                        </span>
                     </button>
                 ) : (
                     <ThemeToggle />
                 )}
             </div>
 
-            {/* Tooltip portal — rendered at fixed position so it escapes overflow:hidden */}
+            {/* Tooltip portal */}
             {collapsed && tooltip && (
                 <div className={styles["tooltip"]} style={{ top: tooltip.y }}>
                     {tooltip.label}
