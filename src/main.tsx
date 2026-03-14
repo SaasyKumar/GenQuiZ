@@ -4,10 +4,13 @@ import "./index.css";
 import "./i18n/i18n";
 import route from "./router";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ThemeProvider } from "./components/ThemeContext";
 
 const router = createBrowserRouter(route);
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
-        <RouterProvider router={router}></RouterProvider>
+        <ThemeProvider>
+            <RouterProvider router={router} />
+        </ThemeProvider>
     </StrictMode>,
 );

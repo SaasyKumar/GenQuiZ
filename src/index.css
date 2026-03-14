@@ -1,22 +1,146 @@
-:root {
-    font-family: sans-serif;
-    line-height: 1.5;
-    font-weight: 400;
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,300&display=swap");
 
-    color-scheme: light;
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+/* ── Light theme (default) ───────────────────────────── */
+:root {
+    --bg: #ffffff;
+    --bg-2: #f4f5f0;
+    --bg-3: #e8ede9;
+    --bg-card: #ffffff;
+    --text: #171614;
+    --text-2: #4a4845;
+    --text-3: #8a8784;
+
+    /* Green — primary brand / success actions */
+    --accent: #1d9e75;
+    --accent-hover: #0f6e56;
+    --accent-light: #e1f5ee;
+    --accent-glow: rgba(29, 158, 117, 0.14);
+
+    /* Blue — informational / navigation / selection */
+    --blue: #2563eb;
+    --blue-hover: #1d4ed8;
+    --blue-light: #eff6ff;
+    --blue-glow: rgba(37, 99, 235, 0.14);
+    --blue-text: #1e40af;
+
+    --divider: #e5e4e1;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07), 0 4px 12px rgba(0, 0, 0, 0.05);
+    --shadow-md:
+        0 4px 16px rgba(0, 0, 0, 0.08), 0 12px 32px rgba(0, 0, 0, 0.06);
+    --shadow-card:
+        0 1px 4px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.06);
+    --nav-bg: rgba(255, 255, 255, 0.94);
+    --radius: 6px;
+    --ff-display: "DM Serif Display", Georgia, serif;
+    --ff-body: "DM Sans", system-ui, sans-serif;
+
+    /* MCQ semantic */
+    --selected-bg: #eff6ff;
+    --selected-text: #1e40af;
+    --selected-border: #2563eb;
+    --correct-bg: #dcfce7;
+    --correct-text: #15803d;
+    --correct-border: #86efac;
+    --wrong-bg: #fee2e2;
+    --wrong-text: #b91c1c;
+    --wrong-border: #fca5a5;
+    --uncheck-color: #e5e4e1;
+    --expl-bg: #f4f5f0;
+
+    /* Submit green */
+    --green: #15803d;
+    --green-hover: #166534;
 }
+
+/* ── Dark theme ──────────────────────────────────────── */
+[data-theme="dark"] {
+    --bg: #111110;
+    --bg-2: #161a18;
+    --bg-3: #1e2421;
+    --bg-card: #1a1f1c;
+    --text: #f0ede8;
+    --text-2: #b8b3aa;
+    --text-3: #6e6a63;
+
+    --accent: #2cc48d;
+    --accent-hover: #1d9e75;
+    --accent-light: rgba(29, 158, 117, 0.18);
+    --accent-glow: rgba(44, 196, 141, 0.18);
+
+    --blue: #60a5fa;
+    --blue-hover: #93c5fd;
+    --blue-light: rgba(37, 99, 235, 0.18);
+    --blue-glow: rgba(96, 165, 250, 0.2);
+    --blue-text: #93c5fd;
+
+    --divider: #252e2a;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
+    --shadow-md:
+        0 4px 16px rgba(0, 0, 0, 0.35), 0 12px 32px rgba(0, 0, 0, 0.25);
+    --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+    --nav-bg: rgba(17, 17, 16, 0.94);
+
+    /* MCQ semantic — softer in dark */
+    --selected-bg: rgba(37, 99, 235, 0.18);
+    --selected-text: #93c5fd;
+    --selected-border: #3b82f6;
+    --correct-bg: rgba(21, 128, 61, 0.18);
+    --correct-text: #4ade80;
+    --correct-border: #166534;
+    --wrong-bg: rgba(185, 28, 28, 0.18);
+    --wrong-text: #f87171;
+    --wrong-border: #7f1d1d;
+    --uncheck-color: #2e2c29;
+    --expl-bg: #1e2421;
+
+    --green: #16a34a;
+    --green-hover: #15803d;
+}
+
+/* ── Global base ─────────────────────────────────────── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    transition:
+        background-color 0.2s,
+        color 0.2s;
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--ff-body);
+}
+
 #root {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
-body {
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
     margin: 0;
 }
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 @font-face {
     font-family: "gen-quiz";
     src:

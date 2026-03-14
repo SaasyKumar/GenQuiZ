@@ -1,50 +1,127 @@
 .body {
+    flex: 1;
+    background-color: var(--bg-2);
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    padding: 2rem;
     align-items: center;
-    justify-content: center;
-    background-color: #e0f2f9;
+    justify-content: flex-start;
+    padding: 2.5rem 1.5rem;
+    min-height: 0;
+    overflow-y: auto;
+    font-family: var(--ff-body);
 }
 .container {
-    min-width: 900px;
-    margin: 0 auto;
-    background-color: #ffff;
-    padding: 2rem;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    width: 100%;
+    max-width: 700px;
+    background: var(--bg-card);
+    border: 1px solid var(--divider);
+    border-radius: 12px;
+    padding: 2rem 2.5rem 1.75rem;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 1.25rem;
+}
+.counter {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--blue-text);
+    background: var(--blue-light);
+    border: 1px solid var(--blue-glow);
+    padding: 3px 10px;
+    border-radius: 999px;
+}
+.progress-track {
+    width: 100%;
+    height: 5px;
+    background: var(--bg-3);
+    border-radius: 999px;
+    margin-bottom: 1.75rem;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue) 0%, var(--accent) 100%);
+    border-radius: 999px;
+    transition: width 0.35s ease;
+}
+.back {
+    height: 32px;
+    padding: 0 14px;
+    font-size: 0.8rem;
+    gap: 5px;
+    background: transparent !important;
+    color: var(--text-3) !important;
+    box-shadow: none !important;
+    border: 1px solid var(--divider);
+}
+.back:hover {
+    background: var(--bg-2) !important;
+    color: var(--text-2) !important;
+    transform: none !important;
+}
+.back::before {
+    content: "\ea44";
+    font-family: "gen-quiz";
 }
 .actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--divider);
+    margin-top: 0.5rem;
 }
 .previous,
 .next,
-.submit,
-.back {
-    width: 100px;
-    justify-content: center;
-    align-items: center;
+.submit {
+    height: 38px;
+    padding: 0 20px;
+    font-size: 0.85rem;
+    min-width: 100px;
     display: flex;
-    height: 30px;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+.previous,
+.next {
+    background: var(--blue-light) !important;
+    color: var(--blue-text) !important;
+    border: 1px solid transparent !important;
+    box-shadow: none !important;
+}
+.previous:hover,
+.next:hover {
+    background: var(--blue) !important;
+    color: #fff !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 3px 10px var(--blue-glow) !important;
 }
 .previous::before {
     content: "\e902";
     font-family: "gen-quiz";
-    /* margin-right: 2px; */
-    font-size: larger;
+    font-size: 1rem;
 }
 .next::after {
     content: "\e903";
     font-family: "gen-quiz";
-    margin-left: 4px;
-    font-size: larger;
+    font-size: 1rem;
 }
-.back::before {
-    content: "\ea44";
-    font-family: "gen-quiz";
-    margin-right: 4px;
+.submit {
+    background: var(--green) !important;
+    box-shadow: 0 1px 4px rgba(21, 128, 61, 0.2) !important;
+}
+.submit:hover {
+    background: var(--green-hover) !important;
+    box-shadow: 0 3px 10px rgba(21, 128, 61, 0.25) !important;
 }

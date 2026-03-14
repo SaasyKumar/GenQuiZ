@@ -1,0 +1,170 @@
+/* ── Inline flex item in the top-bar ──────────────── */
+.sw {
+    position: relative;
+    z-index: 10;
+    font-family: var(--ff-body);
+    user-select: none;
+}
+
+/* ── Pill ─────────────────────────────────────────── */
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 11px 5px 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--divider);
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition:
+        border-color 0.15s,
+        box-shadow 0.15s;
+    white-space: nowrap;
+}
+.pill:hover {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px var(--blue-glow);
+}
+
+/* Pulsing dot */
+.dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--text-3);
+    flex-shrink: 0;
+    transition: background 0.2s;
+}
+.dotRunning {
+    background: var(--accent);
+    animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.45;
+        transform: scale(0.65);
+    }
+}
+
+.time {
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
+    min-width: 38px;
+    text-align: center;
+}
+.overtime {
+    color: var(--wrong-text) !important;
+}
+
+.chevron {
+    font-size: 0.5rem;
+    color: var(--text-3);
+    margin-left: 1px;
+}
+
+/* ── Drop-down panel — anchors to the pill ────────── */
+.panel {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    width: 200px;
+    background: var(--bg-card);
+    border: 1px solid var(--divider);
+    border-radius: 14px;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    animation: drop 0.16s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@keyframes drop {
+    from {
+        opacity: 0;
+        transform: translateY(-6px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Big time readout */
+.display {
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
+    text-align: center;
+    padding: 1.2rem 1rem 0.7rem;
+    line-height: 1;
+}
+
+/* ── Buttons ──────────────────────────────────────── */
+.controls {
+    display: flex;
+    gap: 8px;
+    padding: 0 0.85rem 0.9rem;
+}
+.btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    height: 34px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.13s,
+        color 0.13s,
+        transform 0.1s,
+        box-shadow 0.13s;
+}
+.btn:active {
+    transform: scale(0.96);
+}
+
+.btnPause {
+    background: var(--blue-light);
+    color: var(--blue-text);
+    border-color: var(--blue-glow);
+}
+.btnPause:hover {
+    background: var(--blue);
+    color: #fff;
+    box-shadow: 0 2px 8px var(--blue-glow);
+}
+
+.btnResume {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: var(--accent-glow);
+}
+.btnResume:hover {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 2px 8px var(--accent-glow);
+}
+
+.btnReset {
+    background: var(--bg-2);
+    color: var(--text-3);
+    border-color: var(--divider);
+}
+.btnReset:hover {
+    background: var(--wrong-bg);
+    color: var(--wrong-text);
+    border-color: var(--wrong-border);
+}

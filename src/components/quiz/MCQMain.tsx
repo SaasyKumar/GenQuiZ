@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import MCQ from "./MCQ";
+import Stopwatch from "./Stopwatch";
 import styles from "/src/styles/mcqMain.module.css";
 import { appContext } from "./../App";
 import Button from "./../Button";
@@ -12,17 +13,16 @@ export default function MCQMain() {
     const [showAnswer, setShowAnswer] = useState<boolean>(false);
     const ctx = useContext(appContext);
     const navigate = useNavigate();
+
     useEffect(() => {
         ctx?.updateHeaderHideState(true);
+        return () => {
+            ctx?.updateHeaderHideState(false);
+        };
     }, [ctx]);
 
     function onOptionClick(value: string, questionId: string) {
-        ctx?.setSelectedOption((prev) => {
-            return {
-                ...prev,
-                [questionId]: value,
-            };
-        });
+        ctx?.setSelectedOption((prev) => ({ ...prev, [questionId]: value }));
     }
     function next() {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -33,66 +33,80 @@ export default function MCQMain() {
         setShowAnswer(false);
     }
     function submit() {
-        ctx?.updateHeaderHideState(false);
         navigate("/app/result");
     }
+
     if (!ctx || ctx.questionList.length === 0) {
-        ctx?.updateHeaderHideState(false);
         return (
-            <div>
+            <div className={styles["body"]}>
                 <p>{t("quiz.emptyState")}</p>
             </div>
         );
     }
-    const actions = (
-        <div className={styles["actions"]}>
-            <Button
-                variant="primary"
-                buttonStyle={styles["previous"]}
-                disabled={
-                    ctx?.questionList.length == 0 || currentQuestionIndex == 0
-                }
-                onClick={previous}
-                content={t("quiz.previousButton")}
-            />
-            {ctx && currentQuestionIndex == ctx?.questionList.length - 1 ? (
-                <Button
-                    buttonStyle={styles["submit"]}
-                    variant="primary"
-                    onClick={submit}
-                    content={t("quiz.submitButton")}
-                />
-            ) : (
-                <Button
-                    buttonStyle={styles["next"]}
-                    variant="primary"
-                    disabled={ctx?.questionList.length == 0}
-                    onClick={next}
-                    content={t("quiz.nextButton")}
-                />
-            )}
-        </div>
-    );
+
+    const total = ctx.questionList.length;
+    const progressPct = ((currentQuestionIndex + 1) / total) * 100;
+    const isLast = currentQuestionIndex === total - 1;
+
     return (
         <div className={styles["body"]}>
             <div className={styles["container"]}>
-                <Button
-                    variant="primary"
-                    buttonStyle={styles["back"]}
-                    onClick={() => navigate(-1)}
-                    content={t("quiz.backButton")}
-                />
+                {/* top-bar: back | counter | stopwatch */}
+                <div className={styles["top-bar"]}>
+                    <Button
+                        variant="primary"
+                        buttonStyle={styles["back"]}
+                        onClick={() => navigate(-1)}
+                        content={t("quiz.backButton")}
+                    />
+                    <span className={styles["counter"]}>
+                        {currentQuestionIndex + 1} / {total}
+                    </span>
+                    <Stopwatch />
+                </div>
+
+                <div className={styles["progress-track"]}>
+                    <div
+                        className={styles["progress-fill"]}
+                        style={{ width: `${progressPct}%` }}
+                    />
+                </div>
+
                 <MCQ
                     question={ctx.questionList[currentQuestionIndex]}
                     onOptionClick={onOptionClick}
                     optionsSelected={
                         ctx.optionsSelected[
-                            ctx.questionList[currentQuestionIndex]["id"]
+                            ctx.questionList[currentQuestionIndex].id
                         ]
                     }
                     showAnswer={showAnswer}
-                ></MCQ>
-                {actions}
+                />
+
+                <div className={styles["actions"]}>
+                    <Button
+                        variant="primary"
+                        buttonStyle={styles["previous"]}
+                        disabled={currentQuestionIndex === 0}
+                        onClick={previous}
+                        content={t("quiz.previousButton")}
+                    />
+                    {isLast ? (
+                        <Button
+                            buttonStyle={styles["submit"]}
+                            variant="primary"
+                            onClick={submit}
+                            content={t("quiz.submitButton")}
+                        />
+                    ) : (
+                        <Button
+                            buttonStyle={styles["next"]}
+                            variant="primary"
+                            onClick={next}
+                            content={t("quiz.nextButton")}
+                        />
+                    )}
+                </div>
             </div>
         </div>
     );

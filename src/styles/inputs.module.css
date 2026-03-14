@@ -1,38 +1,77 @@
 .container {
     display: flex;
     flex-direction: column;
+    gap: 4px;
 }
 .container label {
+    font-size: 0.8rem;
     font-weight: 600;
-}
-.select,
-.input {
-    padding: 10px 14px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    margin: 2px 0px;
-    appearance: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 2px;
 }
 .select-wrapper {
     position: relative;
     width: 100%;
 }
 .select-wrapper:hover .drop-down {
-    font-weight: bold;
+    color: var(--text-2);
 }
 .select {
     width: 100%;
+    padding: 10px 36px 10px 12px;
+    border-radius: var(--radius);
+    border: 1.5px solid var(--divider);
+    background: var(--bg-card);
+    font-family: var(--ff-body);
+    font-size: 0.9rem;
+    color: var(--text);
+    appearance: none;
     cursor: pointer;
+    transition:
+        border-color 0.15s,
+        box-shadow 0.15s;
+    outline: none;
+}
+.select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
 }
 .drop-down {
     position: absolute;
     top: 50%;
     right: 12px;
     transform: translateY(-50%);
-    pointer-events: none; /* TODO: wow allows clicking select */
+    pointer-events: none;
+    color: var(--text-3);
+    font-size: 0.75rem;
+    transition: color 0.15s;
 }
 .drop-down::before {
     content: "\e901";
     font-family: "gen-quiz";
+}
+.input {
+    padding: 10px 12px;
+    border-radius: var(--radius);
+    border: 1.5px solid var(--divider);
+    background: var(--bg-card);
+    font-family: var(--ff-body);
+    font-size: 0.9rem;
+    color: var(--text);
+    width: 100%;
+    transition:
+        border-color 0.15s,
+        box-shadow 0.15s;
+    outline: none;
+    appearance: none;
+}
+.input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.input::-webkit-inner-spin-button,
+.input::-webkit-outer-spin-button {
+    opacity: 0.5;
 }

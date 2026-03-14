@@ -1,70 +1,132 @@
+.question-text {
+    font-family: var(--ff-display);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.55;
+    margin-bottom: 1.25rem;
+}
 .result-qn {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
-    padding-right: 10px;
+    gap: 16px;
+    margin-bottom: 1rem;
 }
+.result-qn h3 {
+    font-family: var(--ff-display);
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.5;
+    flex: 1;
+    margin: 0;
+}
+/* Blue bookmark/checkbox — marks questions for review (informational) */
 .checkbox {
-    display: flex;
-    width: 15px;
-    height: 15px;
-    color: rgb(50, 69, 245);
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
+    margin-top: 2px;
+    transition: color 0.15s;
 }
 .checkbox:hover {
-    color: rgb(39, 56, 214);
+    color: var(--blue-hover);
 }
 .checkbox::before,
 .checkbox[data-checked="true"]::before {
     font-family: "gen-quiz";
-    align-self: center;
+    display: block;
+    font-size: 1.15rem;
+    line-height: 1;
 }
 .checkbox::before {
     content: "\ea53";
+    color: var(--uncheck-color);
 }
 .checkbox[data-checked="true"]::before {
     content: "\ea52";
+    color: var(--blue);
 }
 .checkbox input {
     display: none;
 }
-.correct {
-    background-color: green;
-}
+
 .options {
-    display: block;
+    display: flex;
+    align-items: center;
     text-align: start;
-    margin-bottom: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 8px;
+    border: 1.5px solid var(--divider);
+    border-radius: 8px;
+    padding: 11px 14px;
+    width: 100%;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text);
+    background: var(--bg-card);
+    transition:
+        border-color 0.15s,
+        background 0.15s,
+        box-shadow 0.15s;
+    box-shadow: none;
 }
+/* Blue hover — hovering is an informational/exploratory action */
+.selectable-options:hover {
+    border-color: var(--blue);
+    background: var(--blue-light);
+    cursor: pointer;
+    color: var(--blue-text);
+}
+/* Blue selected — "I chose this" is informational, not yet success/fail */
 .selectable-options.options[data-selected="true"] {
-    border: 1px solid rgba(56, 85, 247, 0.8);
-    background-color: rgba(56, 85, 247, 0.3);
+    border-color: var(--selected-border);
+    background: var(--selected-bg);
+    color: var(--selected-text);
+    font-weight: 500;
+    box-shadow: 0 0 0 3px var(--blue-glow);
 }
 .not-selectable.options {
-    cursor: unset;
-}
-.selectable-options:hover {
-    border: 1px solid rgba(0, 0, 0, 0.8);
-}
-.options[data-correct="true"],
-.options[data-wrong="true"] {
-    display: flex;
-    justify-content: space-between;
+    cursor: default;
 }
 .options[data-correct="true"] {
-    background-color: rgba(4, 254, 4, 0.47);
+    border-color: var(--correct-border);
+    background: var(--correct-bg);
+    color: var(--correct-text);
+    font-weight: 500;
+    justify-content: space-between;
 }
 .options[data-correct="true"]::after {
-    opacity: 0.5;
     font-family: "gen-quiz";
     content: "\e900";
+    opacity: 0.7;
+    flex-shrink: 0;
+    margin-left: 8px;
 }
 .options[data-wrong="true"] {
-    background-color: rgba(241, 33, 33, 0.485);
+    border-color: var(--wrong-border);
+    background: var(--wrong-bg);
+    color: var(--wrong-text);
+    font-weight: 500;
+    justify-content: space-between;
 }
 .options[data-wrong="true"]::after {
     font-family: "gen-quiz";
     content: "\e905";
-    opacity: 0.5;
+    opacity: 0.7;
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+/* Blue explanation border — explanations are informational content */
+.explanation {
+    margin-top: 1rem;
+    padding: 12px 16px;
+    background: var(--blue-light);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.875rem;
+    color: var(--text-2);
+    line-height: 1.65;
+    font-weight: 300;
 }

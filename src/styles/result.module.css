@@ -1,37 +1,149 @@
+.page {
+    flex: 1;
+    background: var(--bg-2);
+    padding: 2.5rem 1.5rem;
+    overflow-y: auto;
+    font-family: var(--ff-body);
+}
 .container {
-    display: block;
-    height: 100vh;
-    padding: 2rem;
-    padding-top: 5px;
-}
-.container h1 {
-    text-align: center;
-}
-.header {
+    max-width: 700px;
+    margin: 0 auto;
     display: flex;
+    flex-direction: column;
+    gap: 0;
 }
-.header h1 {
+.score-card {
+    background: var(--bg-card);
+    border: 1px solid var(--divider);
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    /* Blue left accent — score card is a summary/info block */
+    border-left: 4px solid var(--blue);
+}
+.score-left h1 {
+    font-family: var(--ff-display);
+    font-size: 1.7rem;
+    font-weight: 400;
+    color: var(--text);
+    margin: 0 0 4px 0;
+    line-height: 1.2;
+}
+.score-sub {
+    font-size: 0.82rem;
+    color: var(--text-3);
+    margin: 0;
+}
+.score-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+/* Blue score — the number itself is informational data */
+.score-badge {
+    font-family: var(--ff-display);
+    font-size: 2.2rem;
+    color: var(--blue);
+    line-height: 1;
+}
+.score-denom {
+    font-size: 0.78rem;
+    color: var(--text-3);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    align-self: flex-end;
+    padding-bottom: 4px;
+}
+.toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.75rem 0 1.25rem;
+    border-bottom: 1px solid var(--divider);
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+.toolbar-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-3);
     flex: 1;
 }
-.copy,
-.download {
-    display: flex;
-    justify-content: center;
+.copy-btn,
+.download-btn {
+    display: inline-flex;
     align-items: center;
-    font-size: larger;
-    color: rgba(0, 0, 0, 0.5);
+    gap: 7px;
+    height: 36px;
+    padding: 0 16px;
+    border-radius: var(--radius);
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.15s,
+        border-color 0.15s,
+        color 0.15s,
+        box-shadow 0.15s;
+    user-select: none;
+    letter-spacing: 0.01em;
+}
+/* Blue copy — copying is an informational action */
+.copy-btn {
+    background: var(--bg-card);
+    border: 1.5px solid var(--divider);
+    color: var(--text-2);
+}
+.copy-btn::before {
     font-family: "gen-quiz";
-}
-.copy:hover,
-.download:hover {
-    color: rgba(0, 0, 0, 0.7);
-}
-.copy::before {
     content: "\e906";
+    font-size: 1rem;
 }
-.download::before {
-    content: "\e907";
+.copy-btn:hover {
+    border-color: var(--blue);
+    color: var(--blue-text);
+    background: var(--blue-light);
+    box-shadow: 0 0 0 3px var(--blue-glow);
 }
-.copied::before {
+.copy-btn.copied {
+    border-color: var(--correct-border);
+    background: var(--correct-bg);
+    color: var(--correct-text);
+}
+.copy-btn.copied::before {
     content: "\e900";
+}
+/* Green download — saving/completing is a success action */
+.download-btn {
+    background: var(--accent);
+    border: 1.5px solid var(--accent);
+    color: #fff;
+    box-shadow: 0 1px 4px var(--accent-glow);
+}
+.download-btn::before {
+    font-family: "gen-quiz";
+    content: "\e907";
+    font-size: 1rem;
+}
+.download-btn:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
+.question-card {
+    background: var(--bg-card);
+    border: 1px solid var(--divider);
+    border-radius: 10px;
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-sm);
 }

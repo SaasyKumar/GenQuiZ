@@ -73,5 +73,145 @@
     },
     "button": {
         "uploadFile": "Upload File"
+    },
+    "features": {
+        "eyebrow": "Everything Included",
+        "title": "Built to make studying faster",
+        "subtitle": "Every feature in GenQuiZ is designed around one goal: turn any piece of text into a quiz you can take, review, and reuse — with as little friction as possible.",
+        "ctaPrimary": "Start Generating",
+        "ctaSecondary": "See How It Works",
+        "compareLabel": "VS THE ALTERNATIVES",
+        "compareTitle": "How GenQuiZ stacks up",
+        "compareSub": "A quick comparison against the most common ways people create and take MCQ quizzes.",
+        "ctaBanner": {
+            "title": "All of this. For free.",
+            "sub": "No account required for AI generation, parsing, or export. Just paste and go.",
+            "button": "Try It Now →"
+        }
+    },
+    "support": {
+        "eyebrow": "We've Got You",
+        "title": "Support & FAQ",
+        "subtitle": "Answers to the most common questions about GenQuiZ, plus ways to get in touch if something isn't working.",
+        "faqLabel": "COMMON QUESTIONS",
+        "faqTitle": "Frequently Asked Questions",
+        "contactLabel": "GET IN TOUCH",
+        "contactTitle": "Still need help?",
+        "contactSub": "Pick the channel that works best for you. We aim to respond to all support requests within 48 hours.",
+        "ctaBanner": {
+            "title": "Something still not clear?",
+            "sub": "The best way to understand GenQuiZ is to just try it — it takes about 10 seconds.",
+            "button": "Generate a Quiz Now →"
+        }
+    },
+    "howItWorks": {
+        "hero": {
+            "eyebrow": "Under the Hood",
+            "title": "How GenQuiZ Works",
+            "subtitle": "From raw text to a fully interactive quiz in seconds — here's the complete journey your content takes inside GenQuiZ.",
+            "ctaPrimary": "Try AI Generation",
+            "ctaSecondary": "Load Existing Quiz"
+        },
+        "techPillars": [
+            { "value": "AWS Bedrock", "label": "AI Engine" },
+            { "value": "Nova Pro", "label": "Model" },
+            { "value": "Aiken", "label": "Format" },
+            { "value": "React + Vite", "label": "Frontend" },
+            { "value": "i18n", "label": "Languages" }
+        ],
+        "flow": {
+            "title": "The Full Code Flow",
+            "subtitle": "Every step from input to export is handled transparently in the browser and through a serverless AWS Lambda — no data stored, no accounts needed."
+        },
+        "steps": {
+            "step1": {
+                "phase": "Input",
+                "title": "You paste your study material",
+                "description": "On the Generate Quiz page, you paste any raw text — lecture notes, a Wikipedia excerpt, a technical article. You also pick a difficulty level (Child → Hard) and how many questions you want (5–10).",
+                "detail": "DOMPurify sanitises the input in the browser before it ever leaves your device, stripping any unsafe HTML so only clean plain text is sent onward.",
+                "tag": "GenerateQuiz.tsx"
+            },
+            "step2": {
+                "phase": "API Call",
+                "title": "Your text travels to AWS Lambda",
+                "description": "The app POSTs your content, difficulty level, and question count to an AWS API Gateway endpoint backed by a Node.js Lambda function.",
+                "detail": "The Lambda builds a strict system prompt instructing Amazon Nova Pro to produce questions in Aiken format — a plain-text MCQ standard used widely in e-learning. Token budget is calculated as (questionCount × 1200), capped at 10,000, ensuring the model has enough room without wasting resources.",
+                "tag": "lambda.js"
+            },
+            "step3": {
+                "phase": "AI Generation",
+                "title": "Amazon Nova Pro writes the questions",
+                "description": "AWS Bedrock invokes the amazon.nova-pro-v1:0 model with your text as the user message and the format instructions as a system prompt. The model returns questions in this exact structure: QUESTION → options A–D → ANSWER → EXPLANATION.",
+                "detail": "Inference parameters (temperature 0.7, topP 0.9, topK 20) are tuned for factual accuracy with a touch of creative phrasing — keeping questions clear without being robotic.",
+                "tag": "lambda.js → Bedrock"
+            },
+            "step4": {
+                "phase": "Parsing",
+                "title": "Aiken format is parsed into structured data",
+                "description": "The raw model output is handed to extractFromAikenFormat() — a pure TypeScript parser that splits the text line-by-line, groups lines into question blocks by UUID, and maps each block into a typed question object with fields: question, options (keyed a–d), answer, and explanation.",
+                "detail": "The same parser powers the Load Quiz path — so whether AI generates the text or you paste it yourself, all downstream quiz logic is identical. The raw blocks are also preserved as Record<string, string[]> so you can copy or download the original Aiken text later.",
+                "tag": "extractQn.ts"
+            },
+            "step5": {
+                "phase": "Quiz & Results",
+                "title": "You take the quiz, then export what you want",
+                "description": "MCQMain renders one question at a time, tracking your selected options in global context. On submit, the Result page shows every question with colour-coded correct/wrong highlights and the AI's explanation.",
+                "detail": "You can cherry-pick questions using checkboxes, then copy the selected set to clipboard or download them as a .txt file — ready to paste into an LMS, share with classmates, or re-load into GenQuiZ another day.",
+                "tag": "MCQMain.tsx → Result.tsx"
+            }
+        },
+        "paths": {
+            "title": "Two Ways to Start a Quiz",
+            "or": "or",
+            "ai": {
+                "title": "AI-Powered Generation",
+                "desc": "Let GenQuiZ write the questions for you using Amazon Nova Pro via AWS Bedrock.",
+                "steps": [
+                    "Paste any text (notes, articles, docs)",
+                    "Choose difficulty and question count",
+                    "Hit Generate — AI does the rest",
+                    "Questions appear instantly, ready to attempt"
+                ],
+                "cta": "Generate a Quiz"
+            },
+            "parse": {
+                "title": "Load from Aiken Format",
+                "desc": "Already have questions written in Aiken format? Skip the AI step entirely.",
+                "steps": [
+                    "Paste Aiken-formatted text or upload a .txt / .md file",
+                    "GenQuiZ parses the format locally — no network call",
+                    "Questions load straight into quiz mode",
+                    "Same result, export, and copy features apply"
+                ],
+                "cta": "Load a Quiz"
+            }
+        },
+        "export": {
+            "title": "Your Results, Your Data",
+            "desc": "After completing a quiz, the Result page gives you full control over the questions. Nothing is stored on a server — everything lives in your browser session.",
+            "features": [
+                {
+                    "icon": "☑️",
+                    "label": "Select individual questions with checkboxes"
+                },
+                {
+                    "icon": "📋",
+                    "label": "Copy selected questions to clipboard"
+                },
+                {
+                    "icon": "⬇️",
+                    "label": "Download as a .txt file (Aiken format)"
+                },
+                {
+                    "icon": "🔁",
+                    "label": "Re-load the file next time via Load Quiz"
+                }
+            ]
+        },
+        "ctaBanner": {
+            "title": "Ready to turn your notes into a quiz?",
+            "sub": "It takes about 10 seconds. No sign-up, no limits on pasting.",
+            "button": "Get Started Free"
+        }
     }
 }
