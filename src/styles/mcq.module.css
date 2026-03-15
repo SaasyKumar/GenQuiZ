@@ -66,6 +66,7 @@
     font-weight: 400;
     color: var(--text);
     background: var(--bg-card);
+    justify-content: flex-start;
     transition:
         border-color 0.15s,
         background 0.15s,
@@ -84,7 +85,6 @@
     border-color: var(--selected-border);
     background: var(--selected-bg);
     color: var(--selected-text);
-    font-weight: 500;
     box-shadow: 0 0 0 3px var(--blue-glow);
 }
 .not-selectable.options {
