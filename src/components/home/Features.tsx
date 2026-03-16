@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "/src/styles/home/publicPage.module.css";
 import { useTranslation } from "react-i18next";
 import Icon from "../Icon";
-import ThemeToggle from "../ThemeToggle";
+import PublicNav from "./PublicNav";
 
 const FEATURES = [
     {
@@ -137,36 +137,9 @@ export default function Features() {
 
     return (
         <div className={styles["page"]}>
-            {/* ── NAV ── */}
-            <header className={styles["nav"]}>
-                <Link to="/" className={styles["nav-logo"]}>
-                    <Icon />
-                </Link>
-                <ul className={styles["nav-links"]}>
-                    <li>
-                        <Link to="/how-it-works" className={styles["nav-link"]}>
-                            {t("home.nav.howItWorks")}
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            to="/features"
-                            className={`${styles["nav-link"]} ${styles["nav-link-active"]}`}
-                        >
-                            {t("home.nav.features")}
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/support" className={styles["nav-link"]}>
-                            {t("home.nav.support")}
-                        </Link>
-                    </li>
-                </ul>
-                <ThemeToggle />
-            </header>
+            <PublicNav activePage="features" />
 
             <main className={styles["content"]}>
-                {/* ── Hero ── */}
                 <section className={styles["hero"]}>
                     <span className={styles["eyebrow"]}>
                         {t("features.eyebrow")}
@@ -190,7 +163,6 @@ export default function Features() {
                     </div>
                 </section>
 
-                {/* ── Feature cards ── */}
                 <div className={styles["feature-grid"]}>
                     {FEATURES.map((f, i) => (
                         <div key={i} className={styles["feature-card"]}>
@@ -208,7 +180,6 @@ export default function Features() {
                     ))}
                 </div>
 
-                {/* ── Comparison table ── */}
                 <section className={styles["section-intro"]}>
                     <span className={styles["section-label"]}>
                         {t("features.compareLabel")}
@@ -246,7 +217,6 @@ export default function Features() {
                     </table>
                 </div>
 
-                {/* ── CTA ── */}
                 <section className={styles["cta-banner"]}>
                     <h2>{t("features.ctaBanner.title")}</h2>
                     <p>{t("features.ctaBanner.sub")}</p>

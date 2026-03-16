@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "/src/styles/home/publicPage.module.css";
 import { useTranslation } from "react-i18next";
 import Icon from "../Icon";
-import ThemeToggle from "../ThemeToggle";
+import PublicNav from "./PublicNav";
 
 export default function HowItWorks() {
     const { t } = useTranslation();
@@ -64,32 +64,7 @@ export default function HowItWorks() {
 
     return (
         <div className={styles["page"]}>
-            <header className={styles["nav"]}>
-                <Link to="/" className={styles["nav-logo"]}>
-                    <Icon />
-                </Link>
-                <ul className={styles["nav-links"]}>
-                    <li>
-                        <Link
-                            to="/how-it-works"
-                            className={`${styles["nav-link"]} ${styles["nav-link-active"]}`}
-                        >
-                            {t("home.nav.howItWorks")}
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/features" className={styles["nav-link"]}>
-                            {t("home.nav.features")}
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/support" className={styles["nav-link"]}>
-                            {t("home.nav.support")}
-                        </Link>
-                    </li>
-                </ul>
-                <ThemeToggle />
-            </header>
+            <PublicNav activePage="how-it-works" />
 
             <main className={styles["content"]}>
                 <section className={styles["hero"]}>

@@ -26,6 +26,7 @@
     justify-content: space-between;
     gap: 20px;
     border-left: 4px solid var(--blue);
+    flex-wrap: wrap;
 }
 .score-left h1 {
     font-family: var(--ff-display);
@@ -113,6 +114,7 @@
     text-transform: uppercase;
     color: var(--text-3);
     flex: 1;
+    min-width: 120px;
 }
 .copy-btn,
 .download-btn {
@@ -186,14 +188,6 @@
 
 /* ═══════════════════════════════════════════════════════════════
    COMPARISON VIEW  (multi-attempt)
-   Layout per card:
-     ┌──────────────────────────────────────┬──┐
-     │  ▸  Question text                    │ ☑│  ← question row
-     ├──────────────────────────────────────┴──┤
-     │  Attempt 1  [pill]   Attempt 2  [pill]  │  ← answer strip
-     ├─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┤
-     │  (expanded: options + explanation)      │
-     └─────────────────────────────────────────┘
    ═══════════════════════════════════════════════════════════════ */
 
 .cmp-container {
@@ -202,7 +196,6 @@
     gap: 10px;
 }
 
-/* card wrapper for each question */
 .cmp-row {
     background: var(--bg-card);
     border: 1px solid var(--divider);
@@ -211,14 +204,12 @@
     box-shadow: var(--shadow-sm);
 }
 
-/* outer row: question text + checkbox side by side */
 .cmp-question-row {
     display: flex;
     align-items: flex-start;
     gap: 0;
 }
 
-/* question text — grows to fill, clickable to expand */
 .cmp-question {
     flex: 1;
     display: flex;
@@ -244,7 +235,6 @@
     margin-top: 3px;
 }
 
-/* export checkbox — aligns with the question top-right, matches mcq.module.css style */
 .cmp-checkbox {
     flex-shrink: 0;
     width: 20px;
@@ -275,7 +265,6 @@
     display: none;
 }
 
-/* answer strip — full width row, one cell per attempt */
 .cmp-attempts {
     display: flex;
     flex-wrap: wrap;
@@ -284,7 +273,6 @@
     background: var(--bg-2);
 }
 
-/* one attempt cell: label on top, pill below */
 .cmp-cell {
     display: flex;
     flex-direction: column;
@@ -298,7 +286,6 @@
     border-right: none;
 }
 
-/* attempt label ("Attempt 1", "Retry 1") */
 .cmp-cell-label {
     font-size: 0.68rem;
     font-weight: 700;
@@ -307,7 +294,6 @@
     color: var(--text-3);
 }
 
-/* ─── pill badge ─── */
 .pill {
     display: inline-flex;
     align-items: center;
@@ -342,7 +328,6 @@
     flex-shrink: 0;
 }
 
-/* expanded detail panel */
 .cmp-expanded {
     padding: 0.85rem 1.25rem 1rem 2.5rem;
     border-top: 1px dashed var(--divider);
@@ -360,7 +345,6 @@
     }
 }
 
-/* options list inside expanded */
 .cmp-options {
     display: flex;
     flex-direction: column;
@@ -405,10 +389,42 @@
     font-weight: 300;
 }
 
-/* ── Responsive ── */
-@media (max-width: 600px) {
+/* ── Mobile ─────────────────────────────────────────── */
+@media (max-width: 768px) {
     .page {
-        padding: 1.5rem 1rem;
+        padding: 1rem 0.75rem;
+    }
+    .score-card {
+        padding: 1.25rem 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .score-left h1 {
+        font-size: 1.3rem;
+    }
+    .score-right {
+        align-self: flex-end;
+    }
+    .score-multi {
+        justify-content: flex-start;
+    }
+    .toolbar {
+        gap: 8px;
+    }
+    .toolbar-label {
+        width: 100%;
+        flex: none;
+    }
+    .copy-btn,
+    .download-btn {
+        flex: 1;
+        justify-content: center;
+        height: 40px;
+    }
+    .question-card {
+        padding: 1rem;
+        margin-bottom: 8px;
     }
     .cmp-cell {
         min-width: 100%;
@@ -417,5 +433,15 @@
     }
     .cmp-cell:last-child {
         border-bottom: none;
+    }
+    .cmp-expanded {
+        padding: 0.75rem 1rem;
+    }
+    .cmp-question {
+        padding: 0.85rem 0.75rem 0.75rem 1rem;
+        font-size: 0.85rem;
+    }
+    .cmp-checkbox {
+        margin: 0.9rem 1rem 0 0;
     }
 }

@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import Icon from "../Icon";
 import ThemeToggle from "../ThemeToggle";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
 export default function Home() {
     const { t } = useTranslation();
+    const [menuOpen, setMenuOpen] = useState(false);
 
     return (
         <div className={styles["page"]}>
@@ -14,19 +16,33 @@ export default function Home() {
                 <Link to="/" className={styles["nav-logo"]}>
                     <Icon />
                 </Link>
-                <ul className={styles["nav-links"]}>
+                <ul
+                    className={`${styles["nav-links"]} ${menuOpen ? styles["nav-links-open"] : ""}`}
+                >
                     <li>
-                        <Link to="/how-it-works" className={styles["nav-link"]}>
+                        <Link
+                            to="/how-it-works"
+                            className={styles["nav-link"]}
+                            onClick={() => setMenuOpen(false)}
+                        >
                             {t("home.nav.howItWorks")}
                         </Link>
                     </li>
                     <li>
-                        <Link to="/features" className={styles["nav-link"]}>
+                        <Link
+                            to="/features"
+                            className={styles["nav-link"]}
+                            onClick={() => setMenuOpen(false)}
+                        >
                             {t("home.nav.features")}
                         </Link>
                     </li>
                     <li>
-                        <Link to="/support" className={styles["nav-link"]}>
+                        <Link
+                            to="/support"
+                            className={styles["nav-link"]}
+                            onClick={() => setMenuOpen(false)}
+                        >
                             {t("home.nav.support")}
                         </Link>
                     </li>
@@ -35,7 +51,25 @@ export default function Home() {
                 <Link to="/app" className={styles["nav-cta"]}>
                     {t("home.sections.cards.generate.button")} →
                 </Link>
+                <button
+                    className={styles["hamburger"]}
+                    onClick={() => setMenuOpen((v) => !v)}
+                    aria-label={menuOpen ? "Close menu" : "Open menu"}
+                    aria-expanded={menuOpen}
+                >
+                    <span
+                        className={`${styles["ham-line"]} ${menuOpen ? styles["ham-open"] : ""}`}
+                    />
+                </button>
             </header>
+
+            {/* Mobile menu backdrop */}
+            {menuOpen && (
+                <div
+                    className={styles["menu-backdrop"]}
+                    onClick={() => setMenuOpen(false)}
+                />
+            )}
 
             {/* ── HERO ── */}
             <section className={styles["hero"]}>

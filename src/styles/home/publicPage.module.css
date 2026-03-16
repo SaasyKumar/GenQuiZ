@@ -75,6 +75,69 @@
     color: var(--accent);
 }
 
+/* ── Hamburger (hidden on desktop) ── */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0;
+    gap: 5px;
+    transition: background 0.15s;
+}
+.hamburger:hover {
+    background: var(--bg-2);
+}
+.ham-line {
+    display: block;
+    width: 16px;
+    height: 2px;
+    background: var(--text-2);
+    border-radius: 2px;
+    transition:
+        transform 0.22s ease,
+        opacity 0.15s;
+    position: relative;
+}
+.ham-line::before,
+.ham-line::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 16px;
+    height: 2px;
+    background: var(--text-2);
+    border-radius: 2px;
+    transition:
+        transform 0.22s ease,
+        opacity 0.15s;
+}
+.ham-line::before {
+    top: -5px;
+}
+.ham-line::after {
+    top: 5px;
+}
+.ham-open {
+    background: transparent;
+}
+.ham-open::before {
+    transform: translateY(5px) rotate(45deg);
+}
+.ham-open::after {
+    transform: translateY(-5px) rotate(-45deg);
+}
+.menu-backdrop {
+    display: none;
+}
+
 /* ── CONTENT wrapper ── */
 .content {
     flex: 1;
@@ -174,7 +237,6 @@
     color: var(--text);
     background: var(--bg-2);
 }
-/* inverted for dark CTA banner */
 .btn-primary-inv {
     display: inline-flex;
     align-items: center;
@@ -757,14 +819,77 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 720px) {
+@media (max-width: 768px) {
+    /* Nav */
     .nav {
         padding: 0 1.25rem;
-        gap: 16px;
+        gap: 12px;
+        z-index: 200;
     }
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: var(--nav-bg);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--divider);
+        padding: 8px 0 12px;
+        z-index: 199;
+        list-style: none;
+        margin: 0;
+    }
+    .nav-links-open {
+        display: flex;
+    }
+    .nav-links li {
+        padding: 0 1.25rem;
+        display: block;
+    }
+    .nav-link {
+        display: block;
+        padding: 12px 0;
+        font-size: 1rem;
+        border-bottom: 1px solid var(--divider);
+        height: auto;
+        border-radius: 0;
+    }
+    .nav-links li:last-child .nav-link {
+        border-bottom: none;
+    }
+    .hamburger {
+        display: flex;
+        margin-left: auto;
+    }
+    .menu-backdrop {
+        display: block;
+        position: fixed;
+        inset: 0;
+        top: 60px;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 198;
+    }
+
+    /* Hero */
     .hero {
-        padding: 60px 1.25rem 44px;
+        padding: 52px 1.25rem 40px;
     }
+    .hero-cta {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    .btn-primary,
+    .btn-ghost {
+        width: 100%;
+        justify-content: center;
+        padding: 13px 20px;
+    }
+
+    /* Steps */
     .steps-section {
         padding: 32px 1.25rem 48px;
         gap: 40px;
@@ -782,6 +907,8 @@
     .step-number {
         font-size: 2.2rem;
     }
+
+    /* Paths */
     .paths {
         padding: 48px 1.25rem;
     }
@@ -795,28 +922,76 @@
     .path-divider span {
         writing-mode: horizontal-tb;
     }
+
+    /* Tech bar */
     .tech-bar {
-        gap: 24px;
+        gap: 20px;
         padding: 24px 1.25rem;
     }
+
+    /* Export */
     .export-section {
         padding: 48px 1.25rem;
     }
+
+    /* Feature grid — single column on small screens */
     .feature-grid {
+        grid-template-columns: 1fr;
         padding: 32px 1.25rem 48px;
     }
+
+    /* Compare table — allow horizontal scroll */
     .compare-wrap {
         padding: 0 1.25rem 48px;
     }
+    .compare-table {
+        font-size: 0.78rem;
+        min-width: 480px;
+    }
+    .compare-table th,
+    .compare-table td {
+        padding: 10px 8px;
+    }
+
+    /* FAQ */
     .faq-list {
         padding: 0 1.25rem 48px;
     }
+    .faq-question {
+        font-size: 0.88rem;
+        padding: 16px 0;
+    }
+
+    /* Contact */
     .contact-grid {
+        grid-template-columns: 1fr;
         padding: 0 1.25rem 48px;
     }
+
+    /* Section intro */
+    .section-intro {
+        padding: 48px 1.25rem 8px;
+    }
+
+    /* CTA banner */
+    .cta-banner {
+        padding: 56px 1.25rem;
+    }
+    .btn-primary-inv {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    /* Footer */
     .footer {
         padding: 20px 1.25rem;
         gap: 12px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .footer-links {
+        flex-wrap: wrap;
+        gap: 16px;
     }
     .footer-copy {
         margin-left: 0;

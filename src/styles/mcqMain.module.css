@@ -80,6 +80,7 @@
     padding-top: 1.5rem;
     border-top: 1px solid var(--divider);
     margin-top: 0.5rem;
+    gap: 8px;
 }
 .previous,
 .next,
@@ -242,4 +243,50 @@
     background: var(--accent-hover);
     transform: translateY(-1px);
     box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+/* ── Mobile ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .body {
+        padding: 1rem 0.75rem;
+    }
+    .container {
+        padding: 1.25rem 1rem 1rem;
+        border-radius: 10px;
+    }
+    .top-bar {
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+    .progress-track {
+        margin-bottom: 1.25rem;
+    }
+    .actions {
+        padding-top: 1rem;
+        flex-wrap: wrap;
+    }
+    .previous,
+    .next,
+    .submit {
+        flex: 1;
+        min-width: 0;
+        height: 44px;
+        padding: 0 12px;
+        font-size: 0.82rem;
+    }
+    .modal {
+        padding: 1.5rem 1.25rem 1.25rem;
+        border-radius: 12px;
+    }
+    .modal-title {
+        font-size: 1.2rem;
+    }
+    .modal-actions {
+        flex-direction: column;
+    }
+    .modal-btn-secondary,
+    .modal-btn-primary {
+        height: 46px;
+        font-size: 0.9rem;
+    }
 }

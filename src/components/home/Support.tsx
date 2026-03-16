@@ -3,7 +3,7 @@ import { useState } from "react";
 import styles from "/src/styles/home/publicPage.module.css";
 import { useTranslation } from "react-i18next";
 import Icon from "../Icon";
-import ThemeToggle from "../ThemeToggle";
+import PublicNav from "./PublicNav";
 
 const FAQS = [
     {
@@ -83,36 +83,9 @@ export default function Support() {
 
     return (
         <div className={styles["page"]}>
-            {/* ── NAV ── */}
-            <header className={styles["nav"]}>
-                <Link to="/" className={styles["nav-logo"]}>
-                    <Icon />
-                </Link>
-                <ul className={styles["nav-links"]}>
-                    <li>
-                        <Link to="/how-it-works" className={styles["nav-link"]}>
-                            {t("home.nav.howItWorks")}
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/features" className={styles["nav-link"]}>
-                            {t("home.nav.features")}
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            to="/support"
-                            className={`${styles["nav-link"]} ${styles["nav-link-active"]}`}
-                        >
-                            {t("home.nav.support")}
-                        </Link>
-                    </li>
-                </ul>
-                <ThemeToggle />
-            </header>
+            <PublicNav activePage="support" />
 
             <main className={styles["content"]}>
-                {/* ── Hero ── */}
                 <section className={styles["hero"]}>
                     <span className={styles["eyebrow"]}>
                         {t("support.eyebrow")}
@@ -125,7 +98,6 @@ export default function Support() {
                     </p>
                 </section>
 
-                {/* ── FAQ ── */}
                 <section className={styles["section-intro"]}>
                     <span className={styles["section-label"]}>
                         {t("support.faqLabel")}
@@ -154,7 +126,6 @@ export default function Support() {
                     ))}
                 </div>
 
-                {/* ── Contact ── */}
                 <section className={styles["section-intro"]}>
                     <span className={styles["section-label"]}>
                         {t("support.contactLabel")}
@@ -189,7 +160,6 @@ export default function Support() {
                     ))}
                 </div>
 
-                {/* ── CTA ── */}
                 <section className={styles["cta-banner"]}>
                     <h2>{t("support.ctaBanner.title")}</h2>
                     <p>{t("support.ctaBanner.sub")}</p>

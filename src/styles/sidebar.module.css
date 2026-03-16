@@ -297,3 +297,108 @@
     /* Render as text glyph so currentColor takes effect in dark mode */
     font-family: monospace;
 }
+
+/* ── Mobile bottom nav bar ──────────────────────────── */
+@media (max-width: 768px) {
+    .sidebar {
+        /* Replace vertical sidebar with bottom nav */
+        width: 100% !important;
+        height: auto;
+        height: 56px;
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        left: 0;
+        right: 0;
+        flex-direction: row;
+        border-right: none;
+        border-top: 1px solid var(--divider);
+        z-index: 200;
+        overflow: visible;
+        transition: none;
+    }
+
+    .sidebar-top {
+        flex: 1;
+        flex-direction: row;
+        overflow: visible;
+        align-items: stretch;
+    }
+
+    /* Hide logo, section label, toggle in mobile */
+    .logo-row,
+    .section-label,
+    .toggle-btn {
+        display: none;
+    }
+
+    .nav {
+        flex-direction: row;
+        gap: 0;
+        padding: 0;
+        flex: 1;
+        align-items: stretch;
+    }
+
+    .nav-item {
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        padding: 6px 4px;
+        border-radius: 0;
+        font-size: 10px;
+        white-space: normal;
+        text-align: center;
+        overflow: visible;
+    }
+
+    .nav-item.active::before {
+        /* Top indicator line instead of left */
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 32px;
+        height: 3px;
+        border-radius: 0 0 3px 3px;
+    }
+
+    .nav-icon {
+        font-size: 20px;
+        width: auto;
+        opacity: 1;
+        color: var(--text-3);
+    }
+
+    .nav-item.active .nav-icon {
+        color: var(--blue);
+    }
+
+    .nav-item:hover .nav-icon {
+        color: var(--blue-text);
+    }
+
+    .nav-label {
+        font-size: 10px;
+        font-weight: 500;
+        overflow: visible;
+        text-overflow: unset;
+        display: block;
+        color: var(--text-3);
+    }
+
+    .nav-item.active .nav-label {
+        color: var(--blue);
+        font-weight: 600;
+    }
+
+    .sidebar-bottom {
+        display: none;
+    }
+
+    /* Hide tooltip on mobile */
+    .tooltip {
+        display: none;
+    }
+}

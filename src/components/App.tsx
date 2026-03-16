@@ -57,11 +57,22 @@ export default function App() {
                         minWidth: 0,
                         display: "flex",
                         flexDirection: "column",
+                        /* Reserve space at bottom for mobile nav bar */
+                        paddingBottom: "env(safe-area-inset-bottom, 0px)",
                     }}
+                    className="app-main"
                 >
                     <Outlet />
                 </main>
             </div>
+            {/* Global mobile bottom-nav spacing injected via style tag */}
+            <style>{`
+                @media (max-width: 768px) {
+                    .app-main {
+                        padding-bottom: 56px !important;
+                    }
+                }
+            `}</style>
         </appContext.Provider>
     );
 }

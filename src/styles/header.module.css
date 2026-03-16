@@ -61,3 +61,18 @@
     background: var(--accent-light);
     font-weight: 600;
 }
+
+/* ── Mobile ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+    /* The sidebar becomes a bottom nav on mobile,
+       so the top header is not used inside /app routes.
+       If it is shown, compact it. */
+    .header {
+        padding: 0 1rem;
+        gap: 4px;
+    }
+    .nav-link li {
+        padding: 0 10px;
+        font-size: 0.8rem;
+    }
+}
