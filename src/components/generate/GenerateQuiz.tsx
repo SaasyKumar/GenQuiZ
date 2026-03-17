@@ -74,13 +74,13 @@ function GenerateQuiz() {
                 formData.append("level", difficultyLevel);
                 formData.append("no_of_questions", questionCount);
                 response = await fetch(
-                    "https://vm40njaor9.execute-api.us-east-1.amazonaws.com/production/genqiz",
+                    "https://vm40njaor9.execute-api.us-east-1.amazonaws.com/production/genquiz",
                     { method: "POST", body: formData },
                 );
             } else {
                 // ── Text only → application/json ─────────────────────────────
                 response = await fetch(
-                    "https://vm40njaor9.execute-api.us-east-1.amazonaws.com/production/genqiz",
+                    "https://vm40njaor9.execute-api.us-east-1.amazonaws.com/production/genquiz",
                     {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
