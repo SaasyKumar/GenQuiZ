@@ -1,0 +1,7 @@
+#set($inputRoot = $input.path('$'))
+
+{
+  "content": "$util.escapeJavaScript($inputRoot.content)",
+  "level": "$util.escapeJavaScript($inputRoot.level)",
+  "no_of_questions": $inputRoot.no_of_questions
+}
